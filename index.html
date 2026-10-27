@@ -76,6 +76,7 @@
       padding: 4px;
       background: linear-gradient(135deg, #F59E0B, #2563EB, #10B981);
       box-shadow: 0 8px 25px rgba(37, 99, 235, 0.4);
+      cursor: pointer;
     }
 
     .avatar-img {
@@ -446,6 +447,25 @@
       overflow: hidden;
     }
 
+    /* ADMIN LEAD MANAGER BAR */
+    .admin-bar-trigger {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: rgba(30, 41, 59, 0.6);
+      border: 1px dashed rgba(255, 255, 255, 0.2);
+      border-radius: 12px;
+      padding: 8px 14px;
+      font-size: 12px;
+      color: #94A3B8;
+      cursor: pointer;
+    }
+
+    .admin-bar-trigger:hover {
+      background: rgba(30, 41, 59, 0.9);
+      color: #FFFFFF;
+    }
+
     /* FOOTER */
     .footer {
       text-align: center;
@@ -530,7 +550,7 @@
       border-radius: 24px;
       padding: 26px;
       width: 100%;
-      max-width: 380px;
+      max-width: 400px;
       text-align: center;
       display: flex;
       flex-direction: column;
@@ -544,6 +564,52 @@
       from { transform: scale(0.85); opacity: 0; }
       to { transform: scale(1); opacity: 1; }
     }
+
+    /* ADMIN LEADS MODAL */
+    .admin-modal {
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.85);
+      backdrop-filter: blur(8px);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      z-index: 300;
+      padding: 16px;
+    }
+
+    .admin-box {
+      background: #0F172A;
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      border-radius: 20px;
+      padding: 20px;
+      width: 100%;
+      max-width: 480px;
+      max-height: 85vh;
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+      box-shadow: 0 25px 50px rgba(0,0,0,0.7);
+    }
+
+    .admin-table-wrap {
+      overflow-y: auto;
+      max-height: 50vh;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .lead-item {
+      background: #1E293B;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 12px;
+      padding: 12px;
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+      font-size: 13px;
+    }
   </style>
 </head>
 <body>
@@ -552,7 +618,7 @@
     
     <!-- BRAND BIO HEADER -->
     <header class="brand-header">
-      <div class="avatar-wrapper">
+      <div class="avatar-wrapper" onclick="openAdminModal()" title="Nhấn vào đây để xem danh sách đơn đã nhận">
         <img src="assets/vie_bravo_logo.png" alt="Vie Bravo Logo" class="avatar-img">
         <div class="verified-badge">✓</div>
       </div>
@@ -724,6 +790,12 @@
       </form>
     </div>
 
+    <!-- ADMIN QUICK ACCESS BAR -->
+    <div class="admin-bar-trigger" onclick="openAdminModal()">
+      <span>📊 Quản lý đơn ứng tuyển: <strong id="leadCountBadge">0 đơn đã nhận</strong></span>
+      <span style="color: #60A5FA; text-decoration: underline;">Xem & Tải Excel</span>
+    </div>
+
     <!-- FOOTER -->
     <footer class="footer">
       <p><strong>CÔNG TY TNHH VIE BRAVO</strong></p>
@@ -771,12 +843,43 @@
     </div>
   </div>
 
+  <!-- ADMIN LEADS MODAL -->
+  <div class="admin-modal" id="adminModal">
+    <div class="admin-box">
+      <div style="display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid rgba(255,255,255,0.1); padding-bottom: 10px;">
+        <h3 style="font-size: 16px; font-weight: 800; color: #F59E0B;">📋 Danh Sách Đơn Ứng Tuyển Đã Nhận</h3>
+        <button onclick="closeAdminModal()" style="background: transparent; border: none; color: #94A3B8; font-size: 20px; cursor: pointer;">✕</button>
+      </div>
+
+      <div class="admin-table-wrap" id="leadsContainer">
+        <!-- Rendered by JS -->
+      </div>
+
+      <div style="display: flex; gap: 8px; justify-content: flex-end; border-top: 1px solid rgba(255,255,255,0.1); padding-top: 10px;">
+        <button onclick="exportToCSV()" class="btn btn-apply" style="padding: 8px 14px; font-size: 13px; width: auto;">
+          📥 Tải File Excel (.csv)
+        </button>
+        <button onclick="clearLeads()" style="background: rgba(239, 68, 68, 0.2); color: #EF4444; border: 1px solid #EF4444; padding: 8px 12px; border-radius: 12px; font-size: 12px; cursor: pointer;">
+          Xóa hết
+        </button>
+      </div>
+    </div>
+  </div>
+
   <script>
     // =========================================================================
     // 🔗 CẤU HÌNH ĐỒNG BỘ GOOGLE SHEETS
-    // Bạn chỉ cần tạo Google Sheet và dán URL Web App của Apps Script vào đây:
     // =========================================================================
-    const GOOGLE_SHEET_WEBAPP_URL = ""; // Để trống sẽ lưu vào trình duyệt, dán URL vào đây sẽ tự động đẩy lên Google Sheets!
+    // Dán URL Web App (Google Apps Script) của bạn vào giữa 2 dấu ngoặc kép dưới đây:
+    const GOOGLE_SHEET_WEBAPP_URL = ""; 
+
+    function updateLeadBadge() {
+      try {
+        const list = JSON.parse(localStorage.getItem('vie_bravo_applicants') || '[]');
+        const badge = document.getElementById('leadCountBadge');
+        if (badge) badge.innerText = list.length + ' đơn đã nhận';
+      } catch (e) {}
+    }
 
     function scrollToApply(positionName) {
       if (positionName) {
@@ -812,20 +915,21 @@
         pos: pos
       };
 
-      // Hiển thị trạng thái đang gửi
-      submitBtn.innerHTML = '⏳ Đang gửi thông tin...';
+      submitBtn.innerHTML = '⏳ Đang ghi nhận thông tin...';
       submitBtn.disabled = true;
 
-      // 1. Luôn lưu bản sao vào localStorage để không bao giờ mất thông tin
+      // 1. Luôn lưu vào máy (localStorage) để bảo vệ dữ liệu 100%
       try {
         const list = JSON.parse(localStorage.getItem('vie_bravo_applicants') || '[]');
-        list.push(applicantData);
+        list.unshift(applicantData);
         localStorage.setItem('vie_bravo_applicants', JSON.stringify(list));
+        updateLeadBadge();
       } catch (err) {
         console.error('Lỗi lưu cục bộ:', err);
       }
 
-      // 2. Gửi trực tiếp lên Google Sheets (nếu đã cấu hình URL)
+      // 2. Nếu đã có link Google Sheets, đẩy lên đám mây ngay
+      let sheetStatusMsg = "";
       if (GOOGLE_SHEET_WEBAPP_URL && GOOGLE_SHEET_WEBAPP_URL.startsWith('http')) {
         try {
           await fetch(GOOGLE_SHEET_WEBAPP_URL, {
@@ -834,18 +938,19 @@
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(applicantData)
           });
-          console.log('Đã gửi thông tin lên Google Sheets thành công!');
+          sheetStatusMsg = "<br><span style='color:#34D399;font-size:12px;'>✓ Đã đồng bộ trực tiếp lên Google Sheets!</span>";
         } catch (fetchErr) {
-          console.warn('Gửi Sheets gặp lỗi kết nối, dữ liệu đã được lưu an toàn tại máy:', fetchErr);
+          console.warn('Gửi Sheets gặp lỗi:', fetchErr);
         }
+      } else {
+        sheetStatusMsg = "<br><span style='color:#FBBF24;font-size:12px;'>⚠️ Dữ liệu đã lưu an toàn vào máy (bạn có thể bấm 'Xem & Tải Excel' ở cuối trang). Để tự động đẩy về Google Sheets, hãy dán link Apps Script vào nhé!</span>";
       }
 
       submitBtn.innerHTML = originalText;
       submitBtn.disabled = false;
 
-      // Hiển thị thông báo hoàn tất
       document.getElementById('toastMsg').innerHTML = 
-        `Cảm ơn <strong>${name}</strong>!<br>Hồ sơ ứng tuyển vị trí <strong>${pos}</strong> đã được lưu thành công. Cán bộ Vie Bravo sẽ liên hệ trực tiếp đến số <strong>${phone}</strong> trong ít phút!`;
+        `Cảm ơn <strong>${name}</strong>!<br>Đơn ứng tuyển vị trí <strong>${pos}</strong> đã được lưu thành công. Cán bộ Vie Bravo sẽ liên hệ đến số <strong>${phone}</strong> trong ít phút!${sheetStatusMsg}`;
       
       document.getElementById('successToast').style.display = 'flex';
       document.getElementById('recruitmentForm').reset();
@@ -854,6 +959,69 @@
     function closeToast() {
       document.getElementById('successToast').style.display = 'none';
     }
+
+    /* ADMIN LEADS FUNCTIONS */
+    function openAdminModal() {
+      const container = document.getElementById('leadsContainer');
+      const list = JSON.parse(localStorage.getItem('vie_bravo_applicants') || '[]');
+      
+      if (list.length === 0) {
+        container.innerHTML = '<div style="text-align: center; color: #94A3B8; padding: 30px 10px;">Chưa có đơn ứng tuyển nào được gửi.<br>Hãy thử điền form phía trên để kiểm tra nhé!</div>';
+      } else {
+        container.innerHTML = list.map((item, index) => `
+          <div class="lead-item">
+            <div style="display: flex; justify-content: space-between; font-weight: 800; color: #F8FAFC;">
+              <span>${index + 1}. ${item.name} (${item.birth})</span>
+              <span style="color: #F59E0B;">${item.phone}</span>
+            </div>
+            <div style="color: #60A5FA; font-size: 12px;">💼 ${item.pos}</div>
+            <div style="display: flex; justify-content: space-between; font-size: 11px; color: #64748B; margin-top: 2px;">
+              <span>🕒 ${item.time}</span>
+              <a href="tel:${item.phone}" style="color: #34D399; text-decoration: none; font-weight: 700;">📞 Gọi ngay</a>
+            </div>
+          </div>
+        `).join('');
+      }
+
+      document.getElementById('adminModal').style.display = 'flex';
+    }
+
+    function closeAdminModal() {
+      document.getElementById('adminModal').style.display = 'none';
+    }
+
+    function clearLeads() {
+      if (confirm('Bạn có chắc chắn muốn xóa toàn bộ danh sách đơn đã lưu trên máy này?')) {
+        localStorage.removeItem('vie_bravo_applicants');
+        updateLeadBadge();
+        openAdminModal();
+      }
+    }
+
+    function exportToCSV() {
+      const list = JSON.parse(localStorage.getItem('vie_bravo_applicants') || '[]');
+      if (list.length === 0) {
+        alert('Chưa có dữ liệu đơn nào để tải về!');
+        return;
+      }
+
+      let csv = '\uFEFFThời Gian,Họ Và Tên,Số Điện Thoại,Năm Sinh,Vị Trí Ứng Tuyển\n';
+      list.forEach(i => {
+        csv += `"${i.time}","${i.name}","${i.phone}","${i.birth}","${i.pos}"\n`;
+      });
+
+      const blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' });
+      const url = URL.createObjectURL(blob);
+      const link = document.createElement('a');
+      link.setAttribute('href', url);
+      link.setAttribute('download', `Don_Ung_Tuyen_VieBravo_${new Date().toISOString().slice(0,10)}.csv`);
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+    }
+
+    // Initialize badge
+    updateLeadBadge();
   </script>
 </body>
 </html>
