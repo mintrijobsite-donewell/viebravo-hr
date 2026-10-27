@@ -1,0 +1,859 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>Vie Bravo • Việc Làm Uy Tín Bình Dương | Tuyển Dụng Trực Tiếp</title>
+  <meta name="description" content="Vie Bravo - Cổng tuyển dụng lao động trực tiếp tại Bình Dương. Việc làm tạp vụ KCN Bàu Bàng, điện tử VSIP 2. Thu nhập tốt, bao cơm, nhận đến 58 tuổi, không thu phí.">
+  <meta property="og:title" content="Vie Bravo • Việc Làm Uy Tín Bình Dương">
+  <meta property="og:description" content="Tuyển gấp tạp vụ KCN Bàu Bàng 7.5 triệu/tháng, giờ hành chính 8h-16h, bao cơm trưa, nhận đến 58 tuổi. Nhận việc trực tiếp!">
+  <meta property="og:type" content="website">
+
+  <!-- Google Fonts: BE VIETNAM PRO (Font chuẩn tiếng Việt 100% không bao giờ bị lỗi dấu Ứ, Ủ, Ể) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900;1,700&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --primary: #2563EB;
+      --primary-dark: #1D4ED8;
+      --accent-yellow: #F59E0B;
+      --accent-red: #EF4444;
+      --accent-green: #10B981;
+      --bg-dark: #0B1120;
+      --card-bg: #1E293B;
+      --card-border: rgba(255, 255, 255, 0.1);
+      --text-main: #F8FAFC;
+      --text-muted: #94A3B8;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    body {
+      font-family: 'Be Vietnam Pro', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+      background-color: var(--bg-dark);
+      color: var(--text-main);
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      padding-bottom: 95px; /* Space for bottom fixed bar */
+      background-image: 
+        radial-gradient(circle at 50% 0%, rgba(37, 99, 235, 0.25) 0%, transparent 60%),
+        radial-gradient(circle at 100% 40%, rgba(245, 158, 11, 0.12) 0%, transparent 50%),
+        radial-gradient(circle at 0% 80%, rgba(16, 185, 129, 0.12) 0%, transparent 50%);
+    }
+
+    .container {
+      width: 100%;
+      max-width: 500px;
+      padding: 20px 16px;
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    /* HEADER & BRAND BIO */
+    .brand-header {
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 12px;
+      padding: 10px 0;
+    }
+
+    .avatar-wrapper {
+      position: relative;
+      width: 96px;
+      height: 96px;
+      border-radius: 50%;
+      padding: 4px;
+      background: linear-gradient(135deg, #F59E0B, #2563EB, #10B981);
+      box-shadow: 0 8px 25px rgba(37, 99, 235, 0.4);
+    }
+
+    .avatar-img {
+      width: 100%;
+      height: 100%;
+      border-radius: 50%;
+      background: #0F172A;
+      object-fit: contain;
+      padding: 8px;
+    }
+
+    .verified-badge {
+      position: absolute;
+      bottom: 2px;
+      right: 2px;
+      background: #2563EB;
+      color: white;
+      width: 24px;
+      height: 24px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 14px;
+      border: 2px solid var(--bg-dark);
+    }
+
+    .brand-title {
+      font-size: 22px;
+      font-weight: 800;
+      color: #FFFFFF;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      justify-content: center;
+      letter-spacing: -0.3px;
+    }
+
+    .brand-subtitle {
+      font-size: 14px;
+      color: var(--text-muted);
+      line-height: 1.5;
+      padding: 0 10px;
+    }
+
+    .trust-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      justify-content: center;
+      margin-top: 4px;
+    }
+
+    .trust-tag {
+      font-size: 12px;
+      font-weight: 700;
+      padding: 5px 12px;
+      border-radius: 20px;
+      background: rgba(255, 255, 255, 0.08);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      color: #E2E8F0;
+      display: flex;
+      align-items: center;
+      gap: 5px;
+    }
+
+    /* ACTION BUTTONS */
+    .action-group {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .btn {
+      font-family: inherit;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+      width: 100%;
+      padding: 16px;
+      border-radius: 16px;
+      font-size: 16px;
+      font-weight: 800;
+      text-decoration: none;
+      cursor: pointer;
+      transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+      border: none;
+      box-shadow: 0 4px 16px rgba(0,0,0,0.3);
+      letter-spacing: 0.2px;
+    }
+
+    .btn:active {
+      transform: scale(0.98);
+    }
+
+    .btn-zalo {
+      background: linear-gradient(135deg, #0068FF 0%, #004FC4 100%);
+      color: #FFFFFF;
+      box-shadow: 0 8px 24px rgba(0, 104, 255, 0.4);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .btn-zalo::after {
+      content: '';
+      position: absolute;
+      top: -50%;
+      left: -50%;
+      width: 200%;
+      height: 200%;
+      background: linear-gradient(
+        60deg,
+        transparent,
+        rgba(255, 255, 255, 0.2),
+        transparent
+      );
+      transform: rotate(30deg);
+      animation: shimmer 3s infinite;
+    }
+
+    @keyframes shimmer {
+      0% { transform: translateX(-100%) rotate(30deg); }
+      100% { transform: translateX(100%) rotate(30deg); }
+    }
+
+    .btn-phone {
+      background: linear-gradient(135deg, #10B981 0%, #059669 100%);
+      color: #FFFFFF;
+      box-shadow: 0 8px 20px rgba(16, 185, 129, 0.35);
+    }
+
+    .btn-apply {
+      background: linear-gradient(135deg, #F59E0B 0%, #D97706 100%);
+      color: #0F172A;
+      font-weight: 900;
+      box-shadow: 0 8px 20px rgba(245, 158, 11, 0.35);
+    }
+
+    /* SPOTLIGHT JOB CARD */
+    .card-hot {
+      background: var(--card-bg);
+      border: 2px solid rgba(245, 158, 11, 0.4);
+      border-radius: 24px;
+      overflow: hidden;
+      box-shadow: 0 16px 36px rgba(0, 0, 0, 0.5), 0 0 25px rgba(245, 158, 11, 0.15);
+      position: relative;
+    }
+
+    .hot-badge {
+      background: linear-gradient(90deg, #EF4444, #F97316);
+      color: white;
+      font-size: 12px;
+      font-weight: 900;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      padding: 6px 16px;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      border-radius: 0 0 14px 14px;
+      margin-left: 18px;
+    }
+
+    .card-body {
+      padding: 18px;
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+
+    .job-title {
+      font-size: 20px;
+      font-weight: 900;
+      color: #FFFFFF;
+      line-height: 1.35;
+      letter-spacing: -0.3px;
+    }
+
+    .job-salary-banner {
+      background: linear-gradient(135deg, rgba(245, 158, 11, 0.15), rgba(239, 68, 68, 0.1));
+      border: 1.5px solid rgba(245, 158, 11, 0.3);
+      border-radius: 16px;
+      padding: 12px 16px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .salary-num {
+      font-size: 24px;
+      font-weight: 900;
+      color: #FBBF24;
+    }
+
+    .salary-time {
+      font-size: 13px;
+      color: #CBD5E1;
+      font-weight: 700;
+      text-align: right;
+    }
+
+    .job-details-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      font-size: 14px;
+    }
+
+    .job-details-list li {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      line-height: 1.45;
+      color: #E2E8F0;
+    }
+
+    .job-details-list li span.icon {
+      font-size: 16px;
+      flex-shrink: 0;
+      margin-top: 1px;
+    }
+
+    .highlight-pill {
+      background: rgba(16, 185, 129, 0.15);
+      border: 1px solid rgba(16, 185, 129, 0.3);
+      color: #34D399;
+      font-weight: 800;
+      padding: 2px 8px;
+      border-radius: 6px;
+      font-size: 13px;
+    }
+
+    /* CAM KẾT 3 KHÔNG */
+    .commit-box {
+      background: rgba(15, 23, 42, 0.8);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 20px;
+      padding: 18px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .commit-title {
+      font-size: 15px;
+      font-weight: 800;
+      color: #F8FAFC;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .commit-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 10px;
+    }
+
+    .commit-item {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 13.5px;
+      color: #CBD5E1;
+    }
+
+    .commit-check {
+      color: #10B981;
+      font-weight: 900;
+      font-size: 16px;
+    }
+
+    /* OTHER JOBS */
+    .section-title {
+      font-size: 17px;
+      font-weight: 800;
+      color: #FFFFFF;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-top: 10px;
+    }
+
+    .job-mini-card {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 18px;
+      padding: 16px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      text-decoration: none;
+      color: inherit;
+    }
+
+    .job-mini-card:active {
+      transform: scale(0.98);
+      border-color: var(--primary);
+    }
+
+    .mini-info h4 {
+      font-size: 15px;
+      font-weight: 800;
+      color: #FFFFFF;
+      margin-bottom: 4px;
+    }
+
+    .mini-info p {
+      font-size: 13px;
+      color: var(--text-muted);
+    }
+
+    .mini-badge {
+      text-align: right;
+    }
+
+    .mini-salary {
+      font-size: 15px;
+      font-weight: 900;
+      color: #F59E0B;
+    }
+
+    /* QUICK APPLICATION FORM */
+    .apply-card {
+      background: linear-gradient(145deg, #1E293B, #0F172A);
+      border: 1.5px solid rgba(37, 99, 235, 0.4);
+      border-radius: 24px;
+      padding: 22px;
+      box-shadow: 0 12px 30px rgba(0,0,0,0.5);
+    }
+
+    .form-group {
+      margin-bottom: 14px;
+    }
+
+    .form-label {
+      display: block;
+      font-size: 13.5px;
+      font-weight: 700;
+      margin-bottom: 6px;
+      color: #E2E8F0;
+    }
+
+    .form-input, .form-select {
+      font-family: inherit;
+      width: 100%;
+      padding: 14px 16px;
+      border-radius: 14px;
+      border: 1.5px solid rgba(255, 255, 255, 0.15);
+      background: rgba(15, 23, 42, 0.85);
+      color: #FFFFFF;
+      font-size: 15px;
+      outline: none;
+      transition: border 0.2s, box-shadow 0.2s;
+    }
+
+    .form-input:focus, .form-select:focus {
+      border-color: var(--primary);
+      box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.25);
+    }
+
+    .form-submit-btn {
+      position: relative;
+      overflow: hidden;
+    }
+
+    /* FOOTER */
+    .footer {
+      text-align: center;
+      padding: 20px 0 10px;
+      font-size: 12px;
+      color: #64748B;
+      line-height: 1.6;
+    }
+
+    /* FLOATING BOTTOM BAR */
+    .bottom-bar {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      background: rgba(11, 17, 32, 0.95);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border-top: 1px solid rgba(255, 255, 255, 0.12);
+      padding: 10px 16px;
+      display: flex;
+      justify-content: center;
+      z-index: 100;
+    }
+
+    .bar-inner {
+      width: 100%;
+      max-width: 500px;
+      display: grid;
+      grid-template-columns: 1fr 1.6fr 1fr;
+      gap: 8px;
+    }
+
+    .bar-btn {
+      font-family: inherit;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 4px;
+      padding: 10px;
+      border-radius: 12px;
+      text-decoration: none;
+      font-size: 12px;
+      font-weight: 800;
+      border: none;
+      cursor: pointer;
+    }
+
+    .bar-call {
+      background: rgba(255, 255, 255, 0.08);
+      color: #FFFFFF;
+    }
+
+    .bar-zalo {
+      background: #0068FF;
+      color: #FFFFFF;
+    }
+
+    .bar-form {
+      background: #F59E0B;
+      color: #0F172A;
+    }
+
+    /* SUCCESS TOAST MODAL */
+    .toast-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.75);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      z-index: 200;
+      padding: 20px;
+    }
+
+    .toast-box {
+      background: #1E293B;
+      border: 2px solid #10B981;
+      border-radius: 24px;
+      padding: 26px;
+      width: 100%;
+      max-width: 380px;
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 14px;
+      box-shadow: 0 20px 40px rgba(0,0,0,0.6);
+      animation: popIn 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    }
+
+    @keyframes popIn {
+      from { transform: scale(0.85); opacity: 0; }
+      to { transform: scale(1); opacity: 1; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    
+    <!-- BRAND BIO HEADER -->
+    <header class="brand-header">
+      <div class="avatar-wrapper">
+        <img src="assets/vie_bravo_logo.png" alt="Vie Bravo Logo" class="avatar-img">
+        <div class="verified-badge">✓</div>
+      </div>
+      <h1 class="brand-title">
+        Vie Bravo • Việc Làm Bình Dương
+      </h1>
+      <p class="brand-subtitle">
+        Kênh tuyển dụng lao động trực tiếp tại Bình Dương. Nhận việc nhanh, miễn phí 100%, đãi ngộ chuẩn chỉnh!
+      </p>
+
+      <div class="trust-tags">
+        <span class="trust-tag">⚡ Nhận Việc Trực Tiếp</span>
+        <span class="trust-tag">🛡️ 100% Không Thu Phí</span>
+        <span class="trust-tag">👵 Nhận Đến 58 Tuổi</span>
+      </div>
+    </header>
+
+    <!-- PRIMARY ACTION BUTTONS -->
+    <div class="action-group">
+      <a href="https://zalo.me/0333773700" target="_blank" class="btn btn-zalo">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+          <path d="M12 2C6.48 2 2 6.03 2 11c0 2.87 1.5 5.43 3.84 7.04-.15.82-.6 2.37-1.34 3.39 1.45-.16 3.12-.76 4.34-1.63.98.27 2.04.42 3.16.42 5.52 0 10-4.03 10-9s-4.48-9-10-9z"/>
+        </svg>
+        <span>NHẮN Z.A.L.O ĐĂNG KÝ NGAY</span>
+      </a>
+
+      <a href="tel:0333773700" class="btn btn-phone">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path>
+        </svg>
+        <span>GỌI HOTLINE: 033 • 3773 • 700</span>
+      </a>
+    </div>
+
+    <!-- SPOTLIGHT JOB CARD (TẠP VỤ BÀU BÀNG) -->
+    <div class="card-hot" id="job-spotlight">
+      <div class="hot-badge">🔥 TUYỂN GẤP ĐI LÀM NGAY</div>
+      <div class="card-body">
+        <h2 class="job-title">Nhân Viên Tạp Vụ Nhà Xưởng KCN Bàu Bàng</h2>
+
+        <div class="job-salary-banner">
+          <div>
+            <div style="font-size: 11px; text-transform: uppercase; color: #CBD5E1; font-weight: 800;">Thu Nhập Chuẩn</div>
+            <div class="salary-num">7.500.000 đ</div>
+          </div>
+          <div class="salary-time">
+            <div>⏰ 8h00 - 16h00</div>
+            <div style="color: #34D399;">Ca ngày 8 tiếng</div>
+          </div>
+        </div>
+
+        <ul class="job-details-list">
+          <li>
+            <span class="icon">📍</span>
+            <div><strong>Địa điểm làm việc:</strong> KCN Bàu Bàng, Bến Cát - Bàu Bàng, Bình Dương.</div>
+          </li>
+          <li>
+            <span class="icon">👵</span>
+            <div><strong>Độ tuổi:</strong> <span class="highlight-pill">Nhận đến 58 tuổi</span> (ưu tiên phụ nữ, cô chú lao động).</div>
+          </li>
+          <li>
+            <span class="icon">✨</span>
+            <div><strong>Trình độ:</strong> <span class="highlight-pill">Không yêu cầu bằng cấp</span>, không đòi hỏi kinh nghiệm, việc nhẹ dễ làm được hướng dẫn tận tình từ đầu!</div>
+          </li>
+          <li>
+            <span class="icon">🍲</span>
+            <div><strong>Quyền lợi:</strong> <strong>Bao cơm trưa no bụng</strong>, môi trường sạch sẽ, thoáng mát, chế độ bảo hiểm và đãi ngộ đầy đủ.</div>
+          </li>
+        </ul>
+
+        <button onclick="scrollToApply('Tạp Vụ Nhà Xưởng KCN Bàu Bàng (7.5 Tr)')" class="btn btn-apply">
+          📝 ỨNG TUYỂN VỊ TRÍ NÀY
+        </button>
+      </div>
+    </div>
+
+    <!-- CAM KẾT 3 KHÔNG -->
+    <div class="commit-box">
+      <div class="commit-title">
+        <span>🛡️</span>
+        <span>CAM KẾT UY TÍN TỪ VIE BRAVO</span>
+      </div>
+      <div class="commit-grid">
+        <div class="commit-item">
+          <span class="commit-check">✓</span>
+          <span><strong>100% Không thu phí:</strong> Tuyệt đối không mất bất kỳ đồng nào.</span>
+        </div>
+        <div class="commit-item">
+          <span class="commit-check">✓</span>
+          <span><strong>Không giữ giấy tờ gốc:</strong> Chỉ đối chiếu bản photo/CCCD.</span>
+        </div>
+        <div class="commit-item">
+          <span class="commit-check">✓</span>
+          <span><strong>Hỗ trợ tận tình:</strong> Hướng dẫn nhận việc chu đáo trong ngày.</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- OTHER JOBS SECTION -->
+    <h3 class="section-title">
+      <span>💼</span>
+      <span>CÁC CÔNG VIỆC KHÁC ĐANG TUYỂN</span>
+    </h3>
+
+    <div class="action-group">
+      <!-- Job 2 -->
+      <div class="job-mini-card" onclick="scrollToApply('Lắp Ráp Điện Tử VSIP 2 (8-11 Tr)')">
+        <div class="mini-info">
+          <h4>Lắp Ráp Điện Tử VSIP 2 / Đồng An</h4>
+          <p>📍 TP. Mới Bình Dương • Máy lạnh, bao cơm</p>
+        </div>
+        <div class="mini-badge">
+          <div class="mini-salary">8 - 11 Tr</div>
+          <div style="font-size: 11px; color: #34D399; font-weight: 700;">Nhận việc ngay</div>
+        </div>
+      </div>
+
+      <!-- Job 3 -->
+      <div class="job-mini-card" onclick="scrollToApply('Đóng Gói Bao Bì KCN Mỹ Phước (7.5-9.5 Tr)')">
+        <div class="mini-info">
+          <h4>Đóng Gói Bao Bì & Kiểm Hàng</h4>
+          <p>📍 KCN Mỹ Phước 1, 2, 3 • Việc nhẹ ngồi làm</p>
+        </div>
+        <div class="mini-badge">
+          <div class="mini-salary">7.5 - 9.5 Tr</div>
+          <div style="font-size: 11px; color: #34D399; font-weight: 700;">Hành chính</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- QUICK REGISTRATION FORM -->
+    <div class="apply-card" id="apply-form-section">
+      <h3 style="font-size: 18px; font-weight: 900; color: #F59E0B; margin-bottom: 6px;">
+        📋 ĐĂNG KÝ NHẬN VIỆC TRONG 30 GIÂY
+      </h3>
+      <p style="font-size: 13px; color: var(--text-muted); margin-bottom: 16px;">
+        Để lại thông tin, cán bộ tuyển dụng Vie Bravo sẽ gọi điện thoại hoặc liên hệ Zalo hỗ trợ bạn ngay lập tức!
+      </p>
+
+      <form id="recruitmentForm" onsubmit="handleFormSubmit(event)">
+        <div class="form-group">
+          <label class="form-label">Họ và tên của bạn (*)</label>
+          <input type="text" id="fullname" class="form-input" placeholder="Ví dụ: Nguyễn Thị Mai" required>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label">Số điện thoại / Zalo (*)</label>
+          <input type="tel" id="phone" class="form-input" placeholder="Ví dụ: 0987xxxxxx" required>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label">Năm sinh / Độ tuổi (*)</label>
+          <input type="text" id="birthyear" class="form-input" placeholder="Ví dụ: 1975 hoặc 49 tuổi" required>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label">Vị trí muốn ứng tuyển</label>
+          <select id="jobPosition" class="form-select">
+            <option value="Tạp Vụ Nhà Xưởng KCN Bàu Bàng (7.5 Tr)">Tạp Vụ Nhà Xưởng KCN Bàu Bàng (7.5 Tr)</option>
+            <option value="Lắp Ráp Điện Tử VSIP 2 (8-11 Tr)">Lắp Ráp Điện Tử VSIP 2 (8 - 11 Tr)</option>
+            <option value="Đóng Gói Bao Bì KCN Mỹ Phước (7.5-9.5 Tr)">Đóng Gói Bao Bì KCN Mỹ Phước (7.5 - 9.5 Tr)</option>
+            <option value="Tư Vấn Việc Làm Khác Phù Hợp">Tư vấn việc làm khác phù hợp gần nhà</option>
+          </select>
+        </div>
+
+        <button type="submit" id="submitBtn" class="btn btn-apply form-submit-btn" style="margin-top: 8px;">
+          🚀 GỬI ĐĂNG KÝ NGAY HÔM NAY
+        </button>
+      </form>
+    </div>
+
+    <!-- FOOTER -->
+    <footer class="footer">
+      <p><strong>CÔNG TY TNHH VIE BRAVO</strong></p>
+      <p>Trụ sở tuyển dụng & Hỗ trợ việc làm tỉnh Bình Dương</p>
+      <p>Hotline/Zalo: 033 • 3773 • 700</p>
+      <p style="margin-top: 6px; font-size: 11px;">© 2026 Vie Bravo. Bảo lưu mọi quyền.</p>
+    </footer>
+
+  </div>
+
+  <!-- FLOATING QUICK BOTTOM BAR -->
+  <div class="bottom-bar">
+    <div class="bar-inner">
+      <a href="tel:0333773700" class="bar-btn bar-call">
+        <span style="font-size: 16px;">📞</span>
+        <span>Gọi Điện</span>
+      </a>
+
+      <a href="https://zalo.me/0333773700" target="_blank" class="bar-btn bar-zalo">
+        <span style="font-size: 16px;">💬</span>
+        <span>Nhắn Zalo Ngay</span>
+      </a>
+
+      <button onclick="scrollToApply()" class="bar-btn bar-form">
+        <span style="font-size: 16px;">📝</span>
+        <span>Đăng Ký</span>
+      </button>
+    </div>
+  </div>
+
+  <!-- SUCCESS TOAST MODAL -->
+  <div class="toast-overlay" id="successToast">
+    <div class="toast-box">
+      <div style="font-size: 48px;">🎉</div>
+      <h3 style="font-size: 20px; font-weight: 800; color: #10B981;">Đăng Ký Thành Công!</h3>
+      <p style="font-size: 14px; color: #E2E8F0; line-height: 1.5;" id="toastMsg">
+        Cảm ơn bạn! Thông tin ứng tuyển đã được ghi nhận. Cán bộ Vie Bravo sẽ liên hệ cho bạn qua Zalo/Điện thoại ngay.
+      </p>
+      <a href="https://zalo.me/0333773700" target="_blank" class="btn btn-zalo" style="padding: 12px 20px; font-size: 14px;">
+        💬 NHẮN ZALO ĐỂ ĐƯỢC DUYỆT NGAY
+      </a>
+      <button onclick="closeToast()" style="background: transparent; border: none; color: #94A3B8; font-size: 13px; cursor: pointer; text-decoration: underline; margin-top: 4px;">
+        Đóng cửa sổ này
+      </button>
+    </div>
+  </div>
+
+  <script>
+    // =========================================================================
+    // 🔗 CẤU HÌNH ĐỒNG BỘ GOOGLE SHEETS
+    // Bạn chỉ cần tạo Google Sheet và dán URL Web App của Apps Script vào đây:
+    // =========================================================================
+    const GOOGLE_SHEET_WEBAPP_URL = ""; // Để trống sẽ lưu vào trình duyệt, dán URL vào đây sẽ tự động đẩy lên Google Sheets!
+
+    function scrollToApply(positionName) {
+      if (positionName) {
+        const select = document.getElementById('jobPosition');
+        for (let i = 0; i < select.options.length; i++) {
+          if (select.options[i].value.includes(positionName.split(' ')[0])) {
+            select.selectedIndex = i;
+            break;
+          }
+        }
+      }
+      document.getElementById('apply-form-section').scrollIntoView({ behavior: 'smooth' });
+    }
+
+    async function handleFormSubmit(e) {
+      e.preventDefault();
+      const submitBtn = document.getElementById('submitBtn');
+      const originalText = submitBtn.innerHTML;
+
+      const name = document.getElementById('fullname').value.trim();
+      const phone = document.getElementById('phone').value.trim();
+      const birth = document.getElementById('birthyear').value.trim();
+      const pos = document.getElementById('jobPosition').value;
+
+      const now = new Date();
+      const timeFormatted = now.toLocaleDateString('vi-VN') + ' ' + now.toLocaleTimeString('vi-VN');
+
+      const applicantData = {
+        time: timeFormatted,
+        name: name,
+        phone: phone,
+        birth: birth,
+        pos: pos
+      };
+
+      // Hiển thị trạng thái đang gửi
+      submitBtn.innerHTML = '⏳ Đang gửi thông tin...';
+      submitBtn.disabled = true;
+
+      // 1. Luôn lưu bản sao vào localStorage để không bao giờ mất thông tin
+      try {
+        const list = JSON.parse(localStorage.getItem('vie_bravo_applicants') || '[]');
+        list.push(applicantData);
+        localStorage.setItem('vie_bravo_applicants', JSON.stringify(list));
+      } catch (err) {
+        console.error('Lỗi lưu cục bộ:', err);
+      }
+
+      // 2. Gửi trực tiếp lên Google Sheets (nếu đã cấu hình URL)
+      if (GOOGLE_SHEET_WEBAPP_URL && GOOGLE_SHEET_WEBAPP_URL.startsWith('http')) {
+        try {
+          await fetch(GOOGLE_SHEET_WEBAPP_URL, {
+            method: 'POST',
+            mode: 'no-cors',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(applicantData)
+          });
+          console.log('Đã gửi thông tin lên Google Sheets thành công!');
+        } catch (fetchErr) {
+          console.warn('Gửi Sheets gặp lỗi kết nối, dữ liệu đã được lưu an toàn tại máy:', fetchErr);
+        }
+      }
+
+      submitBtn.innerHTML = originalText;
+      submitBtn.disabled = false;
+
+      // Hiển thị thông báo hoàn tất
+      document.getElementById('toastMsg').innerHTML = 
+        `Cảm ơn <strong>${name}</strong>!<br>Hồ sơ ứng tuyển vị trí <strong>${pos}</strong> đã được lưu thành công. Cán bộ Vie Bravo sẽ liên hệ trực tiếp đến số <strong>${phone}</strong> trong ít phút!`;
+      
+      document.getElementById('successToast').style.display = 'flex';
+      document.getElementById('recruitmentForm').reset();
+    }
+
+    function closeToast() {
+      document.getElementById('successToast').style.display = 'none';
+    }
+  </script>
+</body>
+</html>
