@@ -21,11 +21,14 @@ if %errorlevel% equ 0 (
     echo ========================================================
     echo.
     echo Link website cua ban:
-    echo https://mintrijobsite-donewell.github.io/viebravo-hr/
+    echo ?? https://mintrijobsite-donewell.github.io/viebravo-hr/
     echo.
-    echo (Luu y: GitHub can khoang 30s - 1 phut de cap nhat)
+    echo * Luu y: GitHub can khoang 30 giay den 1 phut de cap nhat du lieu moi.
 ) else (
-    echo [LOI] Co loi xay ra khi day len GitHub. Vui long kiem tra mang.
+    echo ========================================================
+    echo   [LOI] Co loi xay ra khi day len GitHub.
+    echo ========================================================
+    echo Vui long kiem tra lai ket noi mang Internet cua ban.
 )
 echo.
 pause
