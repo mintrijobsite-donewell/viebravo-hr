@@ -60,31 +60,16 @@ window.JOB_CONFIG = {
       id: "job-2",
       isHot: false,
       badge: "⚡ VIỆC TỐT LƯƠNG CAO",
-      title: "Lắp Ráp Linh Kiện Điện Tử KCN VSIP 2 / Đồng An",
+      title: "Nhân viên Nam Chà sàn nhà tại KCN Bàu Bàng",
       salaryLabel: "Thu Nhập Bình Quân",
-      salaryAmount: "8.000.000 - 11.000.000 đ",
-      shiftTime: "Xoay ca / Hành chính",
-      shiftNote: "Phụ cấp chuyên cần",
-      location: "KCN VSIP 2 / Đồng An 2, TP. Mới Bình Dương.",
-      audience: "Nam/Nữ từ 18 đến 35 tuổi, sức khỏe tốt.",
+      salaryAmount: "7.300.000",
+      shiftTime: "7h00 - 16h00",
+      shiftNote: "Ca ngày 8 tiếng",
+      location: "Nhà xưởng tại KCN Bàu Bàng",
+      audience: "Nam từ 18 đến dưới 58 tuổi, sức khỏe tốt.",
       workingHours: "Ca 8 tiếng hoặc tăng ca tự nguyện, nghỉ Chủ Nhật.",
-      requirements: "Biết đọc viết cơ bản, chăm chỉ, nhanh nhẹn. Không yêu cầu tay nghề (được đào tạo).",
-      benefits: "Phòng máy lạnh 100%, bao cơm ca miễn phí, thưởng chuyên cần và bảo hiểm đầy đủ."
-    },
-    {
-      id: "job-3",
-      isHot: false,
-      badge: "📦 VIỆC NHẸ NGỒI LÀM",
-      title: "Đóng Gói Bao Bì & Kiểm Hàng KCN Mỹ Phước",
-      salaryLabel: "Thu Nhập",
-      salaryAmount: "7.500.000 - 9.500.000 đ",
-      shiftTime: "7h30 - 16h30",
-      shiftNote: "Giờ hành chính",
-      location: "KCN Mỹ Phước 1, 2, 3, Bến Cát, Bình Dương.",
-      audience: "Nam/Nữ từ 18 đến 45 tuổi, ưu tiên lao động phổ thông.",
-      workingHours: "Từ 7h30 sáng đến 16h30 chiều (nghỉ trưa 1 tiếng, tăng ca tự nguyện).",
-      requirements: "Cẩn thận, tỉ mỉ, mắt sáng. Được hướng dẫn cụ thể từ ngày đầu.",
-      benefits: "Bao cơm trưa, việc nhẹ ngồi làm không mỏi chân, phụ cấp thâm niên và thưởng lễ Tết."
+      requirements: "Chăm chỉ, nhanh nhẹn. Không yêu cầu đọc viết",
+      benefits: "Phòng máy lạnh 100%,  cơm trưa tự túc - có phụ cấp cơm trưa, thưởng chuyên cần và bảo hiểm đầy đủ."
     }
   ]
 };

@@ -1,33 +1,31 @@
 @echo off
-chcp 65001 > nul
-title VIE BRAVO - ĐỒNG BỘ NỘI DUNG LÊN WEBSITE
+title VIE BRAVO - DONG BO WEBSITE
 echo ========================================================
-echo   VIE BRAVO - TỰ ĐỘNG ĐẨY THÔNG TIN MỚI LÊN INTERNET
+echo   VIE BRAVO - DONG BO THONG TIN MOI LEN GITHUB PAGES
 echo ========================================================
 echo.
 cd /d "%~dp0"
 
-echo [1/3] Đang lưu thông tin thay đổi vào hệ thống...
+echo [1/3] Dang luu cac thay doi vao he thong...
 git add .
-git commit -m "HR cap nhat noi dung tuyen dung: %date% %time%"
+git commit -m "Cap nhat thong tin tuyen dung: %date%" 2>nul
 
 echo.
-echo [2/3] Đang đồng bộ lên GitHub Pages...
+echo [2/3] Dang dong bo len GitHub Pages...
 git push origin main
 
 echo.
 if %errorlevel% equ 0 (
     echo ========================================================
-    echo   ✅ CHÚC MỪNG! WEBSITE ĐÃ ĐƯỢC CẬP NHẬT THÀNH CÔNG!
+    echo   [THANH CONG] WEBSITE DA DUOC CAP NHAT LEN INTERNET!
     echo ========================================================
     echo.
-    echo 🌐 Link website của bạn:
-    echo 👉 https://mintrijobsite-donewell.github.io/viebravo-hr/
+    echo Link website cua ban:
+    echo https://mintrijobsite-donewell.github.io/viebravo-hr/
     echo.
-    echo (Lưu ý: Máy chủ GitHub sẽ cập nhật sau khoảng 30s - 1 phút)
+    echo (Luu y: GitHub can khoang 30s - 1 phut de cap nhat)
 ) else (
-    echo ❌ Có lỗi xảy ra trong lúc đẩy lên mạng. Hãy kiểm tra kết nối Internet.
+    echo [LOI] Co loi xay ra khi day len GitHub. Vui long kiem tra mang.
 )
 echo.
-echo Nhấn phím bất kỳ để đóng cửa sổ này...
-pause > nul
+pause
