@@ -1,17 +1,34 @@
 # 🌐 Vie Bravo - Landing Page Tuyển Dụng Lao Động Bình Dương
 
 Trang web Bio Link tuyển dụng tối ưu cho người dùng lướt từ TikTok, Facebook, Zalo.
+Website online: **https://mintrijobsite-donewell.github.io/viebravo-hr/**
 
-## 🚀 Cách đưa lên mạng online miễn phí bằng GitHub Pages:
+---
 
-1. Tạo một repository mới trên [GitHub](https://github.com/new) (ví dụ: `viebravo-jobs`).
-2. Mở thư mục này và nhấp đúp chạy file `push_to_github.bat`, sau đó dán link repository vào.
-3. Trên trang GitHub, vào **Settings** -> **Pages** -> Tại **Build and deployment**, chọn Branch `main` -> Nhấn **Save**.
-4. Website sẽ online tại địa chỉ: `https://<username>.github.io/<repo-name>/`.
+## 🛠️ HƯỚNG DẪN TỰ SỬA THÔNG TIN BÀI ĐĂNG TUYỂN DỤNG CỰC DỄ
 
-## 📊 Cách nhận đơn ứng tuyển tự động về Google Sheets:
+Bạn có **2 cách cực kỳ nhanh** để tự sửa lương, giờ làm việc, quyền lợi, hotline... mà không cần biết lập trình:
 
-1. Mở file [google_apps_script.js](google_apps_script.js).
-2. Làm theo hướng dẫn 3 bước để tạo Google Sheet và nhận link Web App.
-3. Dán link Web App vào dòng `const GOOGLE_SHEET_WEBAPP_URL = "..."` trong file `index.html`.
-4. Mọi thông tin ứng viên điền trên web sẽ tự động chảy thẳng vào Google Sheet của bạn trong thời gian thực!
+### 🌟 CÁCH 1: Sửa trực tiếp trên giao diện website (Khuyên dùng)
+1. Mở trang web tuyển dụng lên trình duyệt.
+2. Cuộn xuống cuối trang (ngay trên chân trang), bấm vào nút màu vàng: **`⚙️ Tự Sửa Bài Tuyển Dụng`**.
+3. Điền các nội dung bạn muốn thay đổi (Tiêu đề, Lương, Giờ làm việc, Cơm trưa, Yêu cầu...).
+4. Bấm **`👁️ Xem Thử Ngay`** để xem trước bài đăng đã đẹp và ưng ý chưa.
+5. Bấm **`📥 Tải File job-config.js`** -> File sẽ được tải về thư mục `Downloads`.
+6. Copy file vừa tải đè vào thư mục này (`D:\videos\landing_page\`).
+7. Nhấp đúp chạy file **`1_Cap_Nhat_Len_Mang.bat`** -> Sau 30 giây toàn bộ trang web trên mạng sẽ tự động cập nhật!
+
+---
+
+### 📝 CÁCH 2: Sửa bằng Notepad trong 10 giây
+1. Nhấp chuột phải vào file **`job-config.js`** -> Chọn **Open with** -> **Notepad**.
+2. Tìm dòng bạn muốn sửa (toàn bộ đều có ghi chú tiếng Việt rõ ràng), chỉ cần sửa chữ trong cặp dấu ngoặc kép `"..."`.
+3. Bấm **Ctrl + S** để lưu lại.
+4. Nhấp đúp chạy file **`1_Cap_Nhat_Len_Mang.bat`** -> Xong!
+
+---
+
+## 📊 Xem & Tải Đơn Ứng Tuyển:
+- Bấm vào thanh **`📊 Quản lý đơn: ... đơn đã nhận`** ở cuối trang web.
+- Bấm **`📥 Tải File Excel (.csv)`** để xuất toàn bộ danh sách ứng viên về máy tính.
+- Mọi đơn ứng tuyển cũng đồng thời được tự động đẩy về Google Sheets thời gian thực.
