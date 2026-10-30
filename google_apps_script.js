@@ -160,5 +160,7 @@ function chuanHoaVaSuaGpmAuto() {
     }
   }
 
-  SpreadsheetApp.getUi().alert("✅ ĐÃ CHUẨN HÓA BẢNG THÀNH CÔNG!\n\n1. Đã xóa bỏ hoàn toàn GPM Auto và thay bằng các vị trí Vie Bravo.\n2. Căn chỉnh lại STT, Thời gian, Nguồn, Họ tên, SĐT vào đúng cột chuẩn 100%.\n3. Đã tạo danh mục chọn xổ xuống chuyên nghiệp!");
+  // Hiển thị thông báo Toast nhẹ nhàng ở góc phải bảng tính (không làm đơ/chờ script)
+  ss.toast("Đã chuẩn hóa cột và xóa bỏ GPM Auto thành công!", "Vie Bravo HR", 5);
+  Logger.log("Chuẩn hóa hoàn tất!");
 }
