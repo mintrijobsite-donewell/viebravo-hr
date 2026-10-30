@@ -11,6 +11,10 @@
  */
 
 window.JOB_CONFIG = {
+  // 🔐 0. MÃ PIN BẢO MẬT QUẢN TRỊ (Chống người ngoài vào xem đơn hoặc sửa bài)
+  // Mặc định là 6868. Bạn có thể đổi thành 4 số hoặc mật khẩu bất kỳ bạn muốn.
+  adminPin: "6868",
+
   // 1. THÔNG TIN LIÊN HỆ & HOTLINE
   hotline: "0333773700",
   hotlineDisplay: "033 • 3773 • 700",
@@ -27,7 +31,7 @@ window.JOB_CONFIG = {
   badge: "🔥 TUYỂN GẤP ĐI LÀM NGAY",
   jobTitle: "Tuyển Dụng Tạp Vụ Nữ Nhà Xưởng KCN Bàu Bàng",
   salaryLabel: "Thu Nhập Chuẩn",
-  salaryValue: "7.500.000 đ",
+  salaryAmount: "7.500.000 đ",
   shiftTime: "7h00 - 16h00",
   shiftNote: "Ca ngày 8 tiếng",
 

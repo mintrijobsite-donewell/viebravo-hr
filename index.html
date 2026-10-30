@@ -568,6 +568,17 @@
       gap: 4px;
       font-size: 13px;
     }
+
+    /* SHAKE ANIMATION FOR PIN ERROR */
+    @keyframes shake {
+      0%, 100% { transform: translateX(0); }
+      20%, 60% { transform: translateX(-8px); }
+      40%, 80% { transform: translateX(8px); }
+    }
+    .shake {
+      animation: shake 0.35s ease-in-out;
+      border-color: #EF4444 !important;
+    }
   </style>
 </head>
 <body>
@@ -576,7 +587,7 @@
     
     <!-- BRAND BIO HEADER -->
     <header class="brand-header">
-      <div class="avatar-wrapper" onclick="openAdminModal()" title="Nhấn vào đây để xem danh sách đơn đã nhận">
+      <div class="avatar-wrapper" onclick="requestAdminAuth('leads')" title="Quản lý tuyển dụng (Yêu cầu mã PIN)">
         <img src="assets/vie_bravo_logo.png" alt="Vie Bravo Logo" class="avatar-img">
         <div class="verified-badge">✓</div>
       </div>
@@ -717,12 +728,12 @@
 
     <!-- ADMIN QUICK ACCESS BAR -->
     <div class="admin-bar-trigger">
-      <div onclick="openAdminModal()" style="display: flex; align-items: center; gap: 6px; cursor: pointer;">
+      <div onclick="requestAdminAuth('leads')" style="display: flex; align-items: center; gap: 6px; cursor: pointer;">
         <span>📊 Quản lý đơn: <strong id="leadCountBadge">0 đơn đã nhận</strong></span>
         <span style="color: #60A5FA; text-decoration: underline; font-size: 11px;">Xem & Tải</span>
       </div>
-      <div onclick="openJobEditorModal()" style="display: flex; align-items: center; gap: 4px; color: #F59E0B; font-weight: 700; cursor: pointer;">
-        <span>⚙️ Tự Sửa Bài Tuyển Dụng</span>
+      <div onclick="requestAdminAuth('editor')" style="display: flex; align-items: center; gap: 4px; color: #F59E0B; font-weight: 700; cursor: pointer;">
+        <span>🔒 Tự Sửa Bài Tuyển Dụng</span>
       </div>
     </div>
 
@@ -773,12 +784,55 @@
     </div>
   </div>
 
+  <!-- ADMIN AUTH PIN MODAL (XÁC THỰC BẢO MẬT QUẢN TRỊ) -->
+  <div class="admin-modal" id="authModal">
+    <div class="admin-box" style="max-width: 360px; text-align: center;">
+      <div style="font-size: 38px; margin-bottom: 2px;">🔐</div>
+      <h3 style="font-size: 18px; font-weight: 800; color: #F59E0B;">Xác Thực Quản Trị Viên</h3>
+      <p style="font-size: 13px; color: #94A3B8; margin-top: 4px; line-height: 1.4;">
+        Vui lòng nhập mã PIN bảo mật để xem đơn ứng tuyển hoặc sửa bài đăng:
+      </p>
+
+      <div style="margin: 16px 0 10px;">
+        <div style="position: relative; display: flex; align-items: center;">
+          <input type="password" id="adminPinInput" class="form-input" 
+                 placeholder="Nhập mã PIN..." maxlength="15"
+                 style="font-size: 20px; text-align: center; letter-spacing: 4px; font-weight: 800; padding: 12px;"
+                 onkeydown="if(event.key === 'Enter') submitAdminPin()">
+          <button type="button" onclick="togglePinVisibility()" 
+                  style="position: absolute; right: 12px; background: none; border: none; font-size: 18px; cursor: pointer; color: #94A3B8;">
+            👁️
+          </button>
+        </div>
+        <div id="authPinError" style="color: #EF4444; font-size: 12px; margin-top: 8px; display: none; font-weight: 600;">
+          ❌ Mã PIN không chính xác! Vui lòng thử lại.
+        </div>
+      </div>
+
+      <div style="display: flex; gap: 8px; margin-top: 8px;">
+        <button onclick="closeAuthModal()" style="background: rgba(255,255,255,0.08); color: #94A3B8; border: 1px solid rgba(255,255,255,0.15); padding: 10px; border-radius: 12px; font-size: 13px; flex: 1; cursor: pointer;">
+          Hủy bỏ
+        </button>
+        <button onclick="submitAdminPin()" class="btn btn-apply" style="padding: 10px; font-size: 13px; flex: 1.3;">
+          🔓 Mở Khóa
+        </button>
+      </div>
+
+      <div style="font-size: 11px; color: #64748B; margin-top: 10px;">
+        💡 Mã PIN bảo mật mặc định: <strong>6868</strong>
+      </div>
+    </div>
+  </div>
+
   <!-- ADMIN LEADS MODAL -->
   <div class="admin-modal" id="adminModal">
     <div class="admin-box">
       <div style="display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid rgba(255,255,255,0.1); padding-bottom: 10px;">
         <h3 style="font-size: 16px; font-weight: 800; color: #F59E0B;">📋 Danh Sách Đơn Ứng Tuyển Đã Nhận</h3>
-        <button onclick="closeAdminModal()" style="background: transparent; border: none; color: #94A3B8; font-size: 20px; cursor: pointer;">✕</button>
+        <div style="display: flex; align-items: center; gap: 6px;">
+          <button onclick="lockAdminSession()" title="Khóa quản trị" style="background: rgba(239, 68, 68, 0.15); border: 1px solid #EF4444; color: #EF4444; font-size: 11px; padding: 4px 8px; border-radius: 8px; cursor: pointer;">🔒 Khóa</button>
+          <button onclick="closeAdminModal()" style="background: transparent; border: none; color: #94A3B8; font-size: 20px; cursor: pointer;">✕</button>
+        </div>
       </div>
 
       <div class="admin-table-wrap" id="leadsContainer">
@@ -804,10 +858,20 @@
           <h3 style="font-size: 16px; font-weight: 800; color: #F59E0B;">⚙️ Tự Sửa Thông Tin Tuyển Dụng</h3>
           <p style="font-size: 11px; color: #94A3B8; margin-top: 2px;">Chỉnh sửa xong có thể xem thử ngay hoặc tải file cấu hình về máy</p>
         </div>
-        <button onclick="closeJobEditorModal()" style="background: transparent; border: none; color: #94A3B8; font-size: 20px; cursor: pointer;">✕</button>
+        <div style="display: flex; align-items: center; gap: 6px;">
+          <button onclick="lockAdminSession()" title="Khóa quản trị" style="background: rgba(239, 68, 68, 0.15); border: 1px solid #EF4444; color: #EF4444; font-size: 11px; padding: 4px 8px; border-radius: 8px; cursor: pointer;">🔒 Khóa</button>
+          <button onclick="closeJobEditorModal()" style="background: transparent; border: none; color: #94A3B8; font-size: 20px; cursor: pointer;">✕</button>
+        </div>
       </div>
 
       <div class="admin-table-wrap" style="max-height: 55vh; padding-right: 6px;">
+        <!-- MÃ PIN BẢO MẬT QUẢN TRỊ -->
+        <div class="form-group" style="margin-bottom: 10px; background: rgba(245, 158, 11, 0.08); border: 1px solid rgba(245, 158, 11, 0.25); border-radius: 10px; padding: 8px 10px;">
+          <label class="form-label" style="color: #F59E0B;">🔐 Mã PIN quản trị (Bảo mật trang web)</label>
+          <input type="text" id="edit_adminPin" class="form-input" placeholder="Mặc định: 6868">
+          <div style="font-size: 11px; color: #94A3B8; margin-top: 4px;">Đổi mã này nếu bạn muốn đặt mã PIN mới riêng cho HR/Admin.</div>
+        </div>
+
         <div class="form-group" style="margin-bottom: 10px;">
           <label class="form-label">Tiêu đề vị trí tuyển dụng</label>
           <input type="text" id="edit_jobTitle" class="form-input">
@@ -976,10 +1040,92 @@
     }
 
     // =========================================================================
+    // 🔐 BẢO MẬT QUẢN TRỊ VIÊN (MÃ PIN / MẬT KHẨU)
+    // =========================================================================
+    let _pendingAdminAction = null;
+
+    function getAdminPin() {
+      if (window.JOB_CONFIG && window.JOB_CONFIG.adminPin) {
+        return String(window.JOB_CONFIG.adminPin).trim();
+      }
+      return '6868';
+    }
+
+    function isAdminAuthenticated() {
+      return sessionStorage.getItem('viebravo_admin_auth') === 'true';
+    }
+
+    function requestAdminAuth(targetAction) {
+      if (isAdminAuthenticated()) {
+        if (targetAction === 'leads') openAdminModal();
+        else if (targetAction === 'editor') openJobEditorModal();
+        return;
+      }
+
+      _pendingAdminAction = targetAction;
+      const input = document.getElementById('adminPinInput');
+      input.value = '';
+      input.type = 'password';
+      document.getElementById('authPinError').style.display = 'none';
+      document.getElementById('authModal').style.display = 'flex';
+      setTimeout(() => input.focus(), 150);
+    }
+
+    function closeAuthModal() {
+      document.getElementById('authModal').style.display = 'none';
+      _pendingAdminAction = null;
+    }
+
+    function submitAdminPin() {
+      const input = document.getElementById('adminPinInput');
+      const enteredPin = input.value.trim();
+      const actualPin = getAdminPin();
+
+      if (enteredPin === actualPin) {
+        sessionStorage.setItem('viebravo_admin_auth', 'true');
+        closeAuthModal();
+        if (_pendingAdminAction === 'leads') {
+          openAdminModal();
+        } else if (_pendingAdminAction === 'editor') {
+          openJobEditorModal();
+        }
+      } else {
+        const errorEl = document.getElementById('authPinError');
+        errorEl.style.display = 'block';
+        input.classList.remove('shake');
+        void input.offsetWidth;
+        input.classList.add('shake');
+        input.value = '';
+        input.focus();
+      }
+    }
+
+    function togglePinVisibility() {
+      const input = document.getElementById('adminPinInput');
+      input.type = input.type === 'password' ? 'text' : 'password';
+    }
+
+    function lockAdminSession() {
+      sessionStorage.removeItem('viebravo_admin_auth');
+      closeAdminModal();
+      closeJobEditorModal();
+      alert('🔒 Đã khóa phiên làm việc quản trị thành công!');
+    }
+
+    // Phím tắt bí mật: Ctrl + Shift + A để mở bảng quản trị
+    document.addEventListener('keydown', (e) => {
+      if (e.ctrlKey && e.shiftKey && (e.key === 'A' || e.key === 'a')) {
+        e.preventDefault();
+        requestAdminAuth('editor');
+      }
+    });
+
+    // =========================================================================
     // ✏️ CÁC HÀM XỬ LÝ TRÌNH SỬA BÀI ĐĂNG (JOB EDITOR)
     // =========================================================================
     function openJobEditorModal() {
       const cfg = window.JOB_CONFIG || {};
+      document.getElementById('edit_adminPin').value = cfg.adminPin || '6868';
       document.getElementById('edit_jobTitle').value = cfg.jobTitle || '';
       document.getElementById('edit_salaryAmount').value = cfg.salaryAmount || '';
       document.getElementById('edit_shiftTime').value = cfg.shiftTime || '';
@@ -1002,6 +1148,7 @@
 
     function collectEditorConfig() {
       const cfg = Object.assign({}, window.JOB_CONFIG || {});
+      cfg.adminPin = document.getElementById('edit_adminPin').value.trim() || '6868';
       cfg.jobTitle = document.getElementById('edit_jobTitle').value.trim();
       cfg.salaryAmount = document.getElementById('edit_salaryAmount').value.trim();
       cfg.shiftTime = document.getElementById('edit_shiftTime').value.trim();
@@ -1039,6 +1186,9 @@
  */
 
 window.JOB_CONFIG = {
+  // 🔐 0. MÃ PIN BẢO MẬT QUẢN TRỊ (Chống người ngoài vào xem đơn hoặc sửa bài)
+  adminPin: "${cfg.adminPin || '6868'}",
+
   // 1. THÔNG TIN LIÊN HỆ & HOTLINE
   hotline: "${cfg.hotline || '0333773700'}",
   hotlineDisplay: "${cfg.hotlineDisplay || '033 • 3773 • 700'}",
