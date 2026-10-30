@@ -388,6 +388,148 @@
       transition: border 0.2s, box-shadow 0.2s;
     }
 
+    .form-select {
+      font-family: inherit;
+      width: 100%;
+      padding: 14px 16px;
+      border-radius: 14px;
+      border: 1.5px solid rgba(255, 255, 255, 0.2);
+      background: #0F172A;
+      color: #FFFFFF;
+      font-size: 14.5px;
+      font-weight: 600;
+      outline: none;
+      transition: border 0.2s, box-shadow 0.2s;
+      appearance: none;
+      -webkit-appearance: none;
+      background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23F59E0B' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
+      background-repeat: no-repeat;
+      background-position: right 14px center;
+      background-size: 18px;
+    }
+
+    .form-select:focus {
+      border-color: #F59E0B;
+      box-shadow: 0 0 0 3px rgba(245, 158, 11, 0.25);
+    }
+
+    /* OTHER JOBS SECTION */
+    .section-title {
+      font-size: 16px;
+      font-weight: 800;
+      color: #FFFFFF;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-top: 4px;
+      letter-spacing: -0.2px;
+    }
+
+    .job-card-expandable {
+      background: var(--card-bg);
+      border: 1.5px solid var(--card-border);
+      border-radius: 18px;
+      overflow: hidden;
+      transition: all 0.25s ease;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.25);
+    }
+
+    .job-card-expandable:hover {
+      border-color: rgba(37, 99, 235, 0.5);
+    }
+
+    .job-card-header {
+      padding: 14px 16px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      cursor: pointer;
+      gap: 12px;
+      user-select: none;
+    }
+
+    .job-card-header:active {
+      background: rgba(255, 255, 255, 0.04);
+    }
+
+    .job-card-badge {
+      font-size: 11px;
+      font-weight: 800;
+      color: #F59E0B;
+      margin-bottom: 4px;
+      display: flex;
+      align-items: center;
+      gap: 4px;
+    }
+
+    .job-card-title {
+      font-size: 15px;
+      font-weight: 800;
+      color: #FFFFFF;
+      line-height: 1.35;
+    }
+
+    .job-card-sub {
+      font-size: 12.5px;
+      color: var(--text-muted);
+      margin-top: 3px;
+    }
+
+    .job-card-salary {
+      font-size: 15px;
+      font-weight: 900;
+      color: #FBBF24;
+      text-align: right;
+      white-space: nowrap;
+    }
+
+    .job-toggle-btn {
+      background: rgba(255, 255, 255, 0.08);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      color: #CBD5E1;
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 12px;
+      flex-shrink: 0;
+      transition: transform 0.2s ease;
+    }
+
+    .job-card-body {
+      padding: 0 16px 16px;
+      border-top: 1px dashed rgba(255, 255, 255, 0.1);
+      margin-top: 2px;
+      padding-top: 12px;
+      display: none;
+    }
+
+    .job-card-body.open {
+      display: block;
+    }
+
+    /* JOB EDITOR CARD ITEM */
+    .editor-job-item {
+      background: #1E293B;
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      border-radius: 14px;
+      padding: 12px;
+      margin-bottom: 12px;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .editor-job-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 1px dashed rgba(255, 255, 255, 0.1);
+      padding-bottom: 8px;
+    }
+
     .form-readonly {
       background: rgba(37, 99, 235, 0.15);
       border-color: rgba(37, 99, 235, 0.4);
@@ -668,6 +810,17 @@
       </div>
     </div>
 
+    <!-- OTHER JOBS SECTION (HIỂN THỊ CÁC CÔNG VIỆC KHÁC NẾU CÓ) -->
+    <div id="other-jobs-section" style="display: none; flex-direction: column; gap: 12px;">
+      <h3 class="section-title">
+        <span>💼</span>
+        <span id="other-jobs-title">CÁC VỊ TRÍ TUYỂN DỤNG KHÁC</span>
+      </h3>
+      <div id="other-jobs-container" style="display: flex; flex-direction: column; gap: 12px;">
+        <!-- Rendered by JS -->
+      </div>
+    </div>
+
     <!-- CAM KẾT 3 KHÔNG -->
     <div class="commit-box">
       <div class="commit-title">
@@ -701,8 +854,10 @@
 
       <form id="recruitmentForm" onsubmit="handleFormSubmit(event)">
         <div class="form-group">
-          <label class="form-label">Vị trí ứng tuyển</label>
-          <input type="text" id="jobPosition" class="form-readonly" value="Tạp Vụ Nữ Nhà Xưởng KCN Bàu Bàng (7.5 Tr)" readonly>
+          <label class="form-label">Vị trí muốn ứng tuyển (*)</label>
+          <select id="jobPosition" class="form-select" required>
+            <!-- Rendered by JS -->
+          </select>
         </div>
 
         <div class="form-group">
@@ -850,13 +1005,13 @@
     </div>
   </div>
 
-  <!-- JOB CONFIG EDITOR MODAL (TỰ SỬA THÔNG TIN TUYỂN DỤNG DỄ DÀNG) -->
+  <!-- JOB CONFIG EDITOR MODAL (TỰ SỬA THÔNG TIN & THÊM VỊ TRÍ TUYỂN DỤNG DỄ DÀNG) -->
   <div class="admin-modal" id="jobEditorModal">
     <div class="admin-box" style="max-height: 90vh;">
       <div style="display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid rgba(255,255,255,0.1); padding-bottom: 10px;">
         <div>
-          <h3 style="font-size: 16px; font-weight: 800; color: #F59E0B;">⚙️ Tự Sửa Thông Tin Tuyển Dụng</h3>
-          <p style="font-size: 11px; color: #94A3B8; margin-top: 2px;">Chỉnh sửa xong có thể xem thử ngay hoặc tải file cấu hình về máy</p>
+          <h3 style="font-size: 16px; font-weight: 800; color: #F59E0B;">⚙️ Quản Lý Vị Trí Tuyển Dụng</h3>
+          <p style="font-size: 11px; color: #94A3B8; margin-top: 2px;">Thêm, sửa, xóa các công việc đăng tuyển dễ dàng</p>
         </div>
         <div style="display: flex; align-items: center; gap: 6px;">
           <button onclick="lockAdminSession()" title="Khóa quản trị" style="background: rgba(239, 68, 68, 0.15); border: 1px solid #EF4444; color: #EF4444; font-size: 11px; padding: 4px 8px; border-radius: 8px; cursor: pointer;">🔒 Khóa</button>
@@ -864,75 +1019,50 @@
         </div>
       </div>
 
-      <div class="admin-table-wrap" style="max-height: 55vh; padding-right: 6px;">
-        <!-- MÃ PIN BẢO MẬT QUẢN TRỊ -->
-        <div class="form-group" style="margin-bottom: 10px; background: rgba(245, 158, 11, 0.08); border: 1px solid rgba(245, 158, 11, 0.25); border-radius: 10px; padding: 8px 10px;">
-          <label class="form-label" style="color: #F59E0B;">🔐 Mã PIN quản trị (Bảo mật trang web)</label>
-          <input type="text" id="edit_adminPin" class="form-input" placeholder="Mặc định: 6868">
-          <div style="font-size: 11px; color: #94A3B8; margin-top: 4px;">Đổi mã này nếu bạn muốn đặt mã PIN mới riêng cho HR/Admin.</div>
-        </div>
-
-        <div class="form-group" style="margin-bottom: 10px;">
-          <label class="form-label">Tiêu đề vị trí tuyển dụng</label>
-          <input type="text" id="edit_jobTitle" class="form-input">
-        </div>
-
-        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-bottom: 10px;">
-          <div class="form-group">
-            <label class="form-label">Mức thu nhập</label>
-            <input type="text" id="edit_salaryAmount" class="form-input">
+      <div class="admin-table-wrap" style="max-height: 58vh; padding-right: 6px;">
+        <!-- CẤU HÌNH CHUNG -->
+        <div style="background: rgba(15, 23, 42, 0.6); border: 1px solid rgba(255, 255, 255, 0.1); border-radius: 12px; padding: 10px; margin-bottom: 12px;">
+          <div style="font-size: 12px; font-weight: 800; color: #60A5FA; margin-bottom: 8px;">⚙️ CẤU HÌNH CHUNG & BẢO MẬT</div>
+          
+          <div class="form-group" style="margin-bottom: 8px;">
+            <label class="form-label" style="color: #F59E0B; font-size: 12px;">🔐 Mã PIN quản trị</label>
+            <input type="text" id="edit_adminPin" class="form-input" placeholder="Mặc định: 6868" style="padding: 10px; font-size: 13px;">
           </div>
-          <div class="form-group">
-            <label class="form-label">Ca làm việc hiển thị</label>
-            <input type="text" id="edit_shiftTime" class="form-input">
+
+          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 8px;">
+            <div class="form-group" style="margin-bottom: 4px;">
+              <label class="form-label" style="font-size: 12px;">Hotline hiển thị</label>
+              <input type="text" id="edit_hotlineDisplay" class="form-input" style="padding: 10px; font-size: 13px;">
+            </div>
+            <div class="form-group" style="margin-bottom: 4px;">
+              <label class="form-label" style="font-size: 12px;">Số gọi liền mạch</label>
+              <input type="text" id="edit_hotline" class="form-input" style="padding: 10px; font-size: 13px;">
+            </div>
           </div>
-        </div>
-
-        <div class="form-group" style="margin-bottom: 10px;">
-          <label class="form-label">Thời gian làm việc chi tiết</label>
-          <input type="text" id="edit_workingHours" class="form-input">
-        </div>
-
-        <div class="form-group" style="margin-bottom: 10px;">
-          <label class="form-label">Quyền lợi & Cơm trưa</label>
-          <textarea id="edit_benefits" class="form-input" rows="2" style="resize: vertical;"></textarea>
-        </div>
-
-        <div class="form-group" style="margin-bottom: 10px;">
-          <label class="form-label">Đối tượng tuyển dụng</label>
-          <input type="text" id="edit_audience" class="form-input">
-        </div>
-
-        <div class="form-group" style="margin-bottom: 10px;">
-          <label class="form-label">Yêu cầu công việc</label>
-          <input type="text" id="edit_requirements" class="form-input">
-        </div>
-
-        <div class="form-group" style="margin-bottom: 10px;">
-          <label class="form-label">Địa điểm làm việc</label>
-          <input type="text" id="edit_location" class="form-input">
-        </div>
-
-        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-bottom: 10px;">
-          <div class="form-group">
-            <label class="form-label">Số Hotline hiển thị</label>
-            <input type="text" id="edit_hotlineDisplay" class="form-input">
-          </div>
-          <div class="form-group">
-            <label class="form-label">Số điện thoại gọi (liền mạch)</label>
-            <input type="text" id="edit_hotline" class="form-input">
+          
+          <div class="form-group" style="margin-top: 6px; margin-bottom: 2px;">
+            <label class="form-label" style="font-size: 12px;">Đường dẫn Zalo</label>
+            <input type="text" id="edit_zaloUrl" class="form-input" style="padding: 10px; font-size: 13px;">
           </div>
         </div>
 
-        <div class="form-group" style="margin-bottom: 10px;">
-          <label class="form-label">Đường dẫn Zalo</label>
-          <input type="text" id="edit_zaloUrl" class="form-input">
+        <!-- DANH SÁCH VỊ TRÍ TUYỂN DỤNG -->
+        <div style="display: flex; justify-content: space-between; align-items: center; margin: 10px 0 6px;">
+          <span style="font-weight: 800; font-size: 13.5px; color: #F59E0B;">
+            📋 DANH SÁCH VỊ TRÍ TUYỂN DỤNG (<span id="editorJobCount">0</span>)
+          </span>
+          <button type="button" onclick="addJobToEditor()" style="background: rgba(16, 185, 129, 0.2); border: 1px solid #10B981; color: #10B981; padding: 5px 12px; border-radius: 8px; font-size: 12px; font-weight: 800; cursor: pointer;">
+            ➕ Thêm Vị Trí Mới
+          </button>
         </div>
 
-        <div class="form-group" style="margin-bottom: 4px;">
-          <label class="form-label">Tên vị trí trong đơn đăng ký</label>
-          <input type="text" id="edit_formJobPosition" class="form-input">
+        <div id="editorJobsContainer">
+          <!-- Rendered dynamically by JS -->
         </div>
+
+        <button type="button" onclick="addJobToEditor()" class="btn btn-zalo" style="padding: 12px; font-size: 13px; margin: 6px 0 12px;">
+          ➕ THÊM VỊ TRÍ TUYỂN DỤNG MỚI
+        </button>
       </div>
 
       <div style="display: flex; flex-direction: column; gap: 8px; border-top: 1px solid rgba(255,255,255,0.1); padding-top: 10px;">
@@ -941,7 +1071,7 @@
             👁️ Xem Thử Ngay
           </button>
           <button onclick="downloadJobConfigFile()" class="btn btn-phone" style="padding: 9px 12px; font-size: 13px; flex: 1.2;">
-            📥 Tải File job-config.js
+            📥 Tải File job-config.js Mới
           </button>
         </div>
         <button onclick="copyJobConfigCode()" style="background: rgba(255,255,255,0.08); color: #CBD5E1; border: 1px solid rgba(255,255,255,0.15); padding: 7px; border-radius: 10px; font-size: 12px; cursor: pointer;">
@@ -957,56 +1087,47 @@
     // =========================================================================
     const GOOGLE_SHEET_WEBAPP_URL = "https://script.google.com/macros/s/AKfycbz8pHnBnU6GoF0uBix9HmQK-iRnxokM2y5L7rHSTtA2Ujtz3cLQuOTu1WbBGbpBJwi3/exec"; 
 
-    // =========================================================================
-    // ⚙️ RENDER VÀ ĐỒNG BỘ DỮ LIỆU TỪ JOB_CONFIG
-    // =========================================================================
-    function renderJobConfig() {
-      const cfg = window.JOB_CONFIG;
-      if (!cfg) return;
+    // Biến lưu danh sách công việc tạm thời khi mở trình sửa
+    let _editorJobs = [];
 
-      if (cfg.jobTitle) {
-        const el = document.getElementById('cfg-jobTitle');
-        if (el) el.innerText = cfg.jobTitle;
+    // =========================================================================
+    // ⚙️ RENDER VÀ ĐỒNG BỘ DỮ LIỆU TỪ JOB_CONFIG (HỖ TRỢ NHIỀU VỊ TRÍ)
+    // =========================================================================
+    function getNormalizedJobs() {
+      const cfg = window.JOB_CONFIG || {};
+      if (Array.isArray(cfg.jobs) && cfg.jobs.length > 0) {
+        return cfg.jobs;
       }
-      if (cfg.salaryLabel) {
-        const el = document.getElementById('cfg-salaryLabel');
-        if (el) el.innerText = cfg.salaryLabel;
+      // Khởi tạo vị trí mặc định nếu chưa có
+      return [{
+        id: "job-1",
+        isHot: true,
+        badge: cfg.badge || "🔥 TUYỂN GẤP ĐI LÀM NGAY",
+        title: cfg.jobTitle || "Tuyển Dụng Tạp Vụ Nữ Nhà Xưởng KCN Bàu Bàng",
+        salaryLabel: cfg.salaryLabel || "Thu Nhập Chuẩn",
+        salaryAmount: cfg.salaryAmount || "7.500.000 đ",
+        shiftTime: cfg.shiftTime || "7h00 - 16h00",
+        shiftNote: cfg.shiftNote || "Ca ngày 8 tiếng",
+        location: cfg.location || "Nhà xưởng tại KCN Bàu Bàng, Bình Dương.",
+        audience: cfg.audience || "Chỉ tuyển Nữ • Nhận đến 58 tuổi (ưu tiên các cô, các chị lao động phổ thông).",
+        workingHours: cfg.workingHours || "Từ 7h00 sáng đến 16h00 chiều (làm 8 tiếng/ngày, không ép tăng ca).",
+        requirements: cfg.requirements || "Không yêu cầu bằng cấp, không cần kinh nghiệm. Công việc nhẹ nhàng, được hướng dẫn chu đáo từ ngày đầu.",
+        benefits: cfg.benefits || "Cơm trưa tự túc, phụ cấp tiền cơm, môi trường sạch sẽ, thoáng mát, chế độ bảo hiểm và đãi ngộ đầy đủ."
+      }];
+    }
+
+    function renderJobConfig() {
+      const cfg = window.JOB_CONFIG || {};
+      const jobs = getNormalizedJobs();
+
+      // Cập nhật thương hiệu & liên hệ
+      if (cfg.brandTitle) {
+        const el = document.getElementById('cfg-brandTitle');
+        if (el) el.innerText = cfg.brandTitle;
       }
-      if (cfg.salaryAmount) {
-        const el = document.getElementById('cfg-salaryAmount');
-        if (el) el.innerText = cfg.salaryAmount;
-      }
-      if (cfg.shiftTime) {
-        const el = document.getElementById('cfg-shiftTime');
-        if (el) el.innerText = (cfg.shiftTime.startsWith('⏰') ? '' : '⏰ ') + cfg.shiftTime;
-      }
-      if (cfg.shiftNote) {
-        const el = document.getElementById('cfg-shiftNote');
-        if (el) el.innerText = cfg.shiftNote;
-      }
-      if (cfg.location) {
-        const el = document.getElementById('cfg-location');
-        if (el) el.innerHTML = `<strong>Địa điểm làm việc:</strong> ${cfg.location}`;
-      }
-      if (cfg.audience) {
-        const el = document.getElementById('cfg-audience');
-        if (el) el.innerHTML = `<strong>Đối tượng:</strong> ${cfg.audience}`;
-      }
-      if (cfg.workingHours) {
-        const el = document.getElementById('cfg-workingHours');
-        if (el) el.innerHTML = `<strong>Thời gian làm việc:</strong> ${cfg.workingHours}`;
-      }
-      if (cfg.requirements) {
-        const el = document.getElementById('cfg-requirements');
-        if (el) el.innerHTML = `<strong>Yêu cầu:</strong> ${cfg.requirements}`;
-      }
-      if (cfg.benefits) {
-        const el = document.getElementById('cfg-benefits');
-        if (el) el.innerHTML = `<strong>Quyền lợi:</strong> ${cfg.benefits}`;
-      }
-      if (cfg.formJobPosition) {
-        const el = document.getElementById('jobPosition');
-        if (el) el.value = cfg.formJobPosition;
+      if (cfg.brandSubtitle) {
+        const el = document.getElementById('cfg-brandSubtitle');
+        if (el) el.innerText = cfg.brandSubtitle;
       }
       if (cfg.commit1) {
         const el = document.getElementById('cfg-commit1');
@@ -1037,6 +1158,133 @@
       if (cfg.zaloUrl) {
         document.querySelectorAll('a[href*="zalo.me"]').forEach(a => a.href = cfg.zaloUrl);
       }
+
+      // 1. RENDER VỊ TRÍ NỔI BẬT ĐẦU TIÊN (SPOTLIGHT CARD)
+      const primaryJob = jobs[0];
+      if (primaryJob) {
+        const badgeEl = document.getElementById('cfg-badge');
+        if (badgeEl) badgeEl.innerText = primaryJob.badge || '🔥 TUYỂN GẤP ĐI LÀM NGAY';
+
+        const titleEl = document.getElementById('cfg-jobTitle');
+        if (titleEl) titleEl.innerText = primaryJob.title;
+
+        const salLabelEl = document.getElementById('cfg-salaryLabel');
+        if (salLabelEl) salLabelEl.innerText = primaryJob.salaryLabel || 'Thu Nhập Chuẩn';
+
+        const salAmountEl = document.getElementById('cfg-salaryAmount');
+        if (salAmountEl) salAmountEl.innerText = primaryJob.salaryAmount;
+
+        const shiftTimeEl = document.getElementById('cfg-shiftTime');
+        if (shiftTimeEl) shiftTimeEl.innerText = (primaryJob.shiftTime && primaryJob.shiftTime.startsWith('⏰') ? '' : '⏰ ') + (primaryJob.shiftTime || '');
+
+        const shiftNoteEl = document.getElementById('cfg-shiftNote');
+        if (shiftNoteEl) shiftNoteEl.innerText = primaryJob.shiftNote || '';
+
+        const locEl = document.getElementById('cfg-location');
+        if (locEl) locEl.innerHTML = `<strong>Địa điểm làm việc:</strong> ${primaryJob.location || ''}`;
+
+        const audEl = document.getElementById('cfg-audience');
+        if (audEl) audEl.innerHTML = `<strong>Đối tượng:</strong> ${primaryJob.audience || ''}`;
+
+        const hoursEl = document.getElementById('cfg-workingHours');
+        if (hoursEl) hoursEl.innerHTML = `<strong>Thời gian làm việc:</strong> ${primaryJob.workingHours || ''}`;
+
+        const reqEl = document.getElementById('cfg-requirements');
+        if (reqEl) reqEl.innerHTML = `<strong>Yêu cầu:</strong> ${primaryJob.requirements || ''}`;
+
+        const benEl = document.getElementById('cfg-benefits');
+        if (benEl) benEl.innerHTML = `<strong>Quyền lợi:</strong> ${primaryJob.benefits || ''}`;
+      }
+
+      // 2. RENDER CÁC VỊ TRÍ CÒN LẠI (NẾU CÓ TỪ 2 VỊ TRÍ TRỞ LÊN)
+      const otherSection = document.getElementById('other-jobs-section');
+      const otherContainer = document.getElementById('other-jobs-container');
+
+      if (jobs.length > 1) {
+        otherSection.style.display = 'flex';
+        const otherJobs = jobs.slice(1);
+        document.getElementById('other-jobs-title').innerText = `CÁC VỊ TRÍ TUYỂN DỤNG KHÁC (${otherJobs.length})`;
+
+        otherContainer.innerHTML = otherJobs.map((job, idx) => {
+          const actualIndex = idx + 1;
+          return `
+            <div class="job-card-expandable" id="job-card-${actualIndex}">
+              <div class="job-card-header" onclick="toggleJobDetails(${actualIndex})">
+                <div style="flex: 1; padding-right: 8px;">
+                  <div class="job-card-badge">${job.badge || '⚡ VIỆC TỐT'}</div>
+                  <div class="job-card-title">${job.title}</div>
+                  <div class="job-card-sub">📍 ${job.location || 'Bình Dương'}</div>
+                </div>
+                <div style="display: flex; align-items: center; gap: 8px;">
+                  <div class="job-card-salary">${job.salaryAmount}</div>
+                  <div class="job-toggle-btn" id="toggle-icon-${actualIndex}">▼</div>
+                </div>
+              </div>
+
+              <div class="job-card-body" id="job-details-${actualIndex}">
+                <ul class="job-details-list" style="font-size: 13.5px; gap: 9px;">
+                  ${job.shiftTime ? `<li><span class="icon">⏰</span><div><strong>Ca làm việc:</strong> ${job.shiftTime} (${job.shiftNote || ''})</div></li>` : ''}
+                  ${job.workingHours ? `<li><span class="icon">🕒</span><div><strong>Thời gian:</strong> ${job.workingHours}</div></li>` : ''}
+                  ${job.audience ? `<li><span class="icon">👵</span><div><strong>Đối tượng:</strong> ${job.audience}</div></li>` : ''}
+                  ${job.requirements ? `<li><span class="icon">✨</span><div><strong>Yêu cầu:</strong> ${job.requirements}</div></li>` : ''}
+                  ${job.benefits ? `<li><span class="icon">🍲</span><div><strong>Quyền lợi:</strong> ${job.benefits}</div></li>` : ''}
+                </ul>
+
+                <button onclick="scrollToApply('${job.title}')" class="btn btn-apply" style="margin-top: 14px; padding: 11px; font-size: 13px;">
+                  📝 ỨNG TUYỂN VỊ TRÍ NÀY
+                </button>
+              </div>
+            </div>
+          `;
+        }).join('');
+      } else {
+        otherSection.style.display = 'none';
+        otherContainer.innerHTML = '';
+      }
+
+      // 3. CẬP NHẬT DANH SÁCH DROPDOWN CHỌN VỊ TRÍ TRONG FORM
+      const selectEl = document.getElementById('jobPosition');
+      if (selectEl) {
+        const currentSelected = selectEl.value;
+        let optionsHtml = jobs.map(j => `<option value="${j.title} (${j.salaryAmount})">${j.title} (${j.salaryAmount})</option>`).join('');
+        optionsHtml += `<option value="Tư vấn việc làm khác phù hợp gần nhà">Tư vấn việc làm khác phù hợp gần nhà</option>`;
+        selectEl.innerHTML = optionsHtml;
+        if (currentSelected && selectEl.querySelector(`option[value="${currentSelected}"]`)) {
+          selectEl.value = currentSelected;
+        }
+      }
+    }
+
+    // Toggle đóng/mở chi tiết công việc
+    function toggleJobDetails(index) {
+      const details = document.getElementById(`job-details-${index}`);
+      const icon = document.getElementById(`toggle-icon-${index}`);
+      if (details) {
+        const isOpen = details.classList.contains('open');
+        if (isOpen) {
+          details.classList.remove('open');
+          if (icon) icon.innerText = '▼';
+        } else {
+          details.classList.add('open');
+          if (icon) icon.innerText = '▲';
+        }
+      }
+    }
+
+    // Cuộn xuống form và tự động chọn đúng công việc
+    function scrollToApply(positionTitle) {
+      if (positionTitle) {
+        const select = document.getElementById('jobPosition');
+        if (select) {
+          for (let i = 0; i < select.options.length; i++) {
+            if (select.options[i].value.toLowerCase().includes(positionTitle.toLowerCase())) {
+              select.selectedIndex = i;
+              break;
+            }
+          }
+        }
+      }
+      document.getElementById('apply-form-section').scrollIntoView({ behavior: 'smooth' });
     }
 
     // =========================================================================
@@ -1121,23 +1369,18 @@
     });
 
     // =========================================================================
-    // ✏️ CÁC HÀM XỬ LÝ TRÌNH SỬA BÀI ĐĂNG (JOB EDITOR)
+    // ✏️ CÁC HÀM XỬ LÝ TRÌNH SỬA & THÊM VỊ TRÍ TUYỂN DỤNG (MULTI-JOB EDITOR)
     // =========================================================================
     function openJobEditorModal() {
       const cfg = window.JOB_CONFIG || {};
       document.getElementById('edit_adminPin').value = cfg.adminPin || '6868';
-      document.getElementById('edit_jobTitle').value = cfg.jobTitle || '';
-      document.getElementById('edit_salaryAmount').value = cfg.salaryAmount || '';
-      document.getElementById('edit_shiftTime').value = cfg.shiftTime || '';
-      document.getElementById('edit_workingHours').value = cfg.workingHours || '';
-      document.getElementById('edit_benefits').value = cfg.benefits || '';
-      document.getElementById('edit_audience').value = cfg.audience || '';
-      document.getElementById('edit_requirements').value = cfg.requirements || '';
-      document.getElementById('edit_location').value = cfg.location || '';
-      document.getElementById('edit_hotlineDisplay').value = cfg.hotlineDisplay || '';
-      document.getElementById('edit_hotline').value = cfg.hotline || '';
-      document.getElementById('edit_zaloUrl').value = cfg.zaloUrl || '';
-      document.getElementById('edit_formJobPosition').value = cfg.formJobPosition || '';
+      document.getElementById('edit_hotlineDisplay').value = cfg.hotlineDisplay || '033 • 3773 • 700';
+      document.getElementById('edit_hotline').value = cfg.hotline || '0333773700';
+      document.getElementById('edit_zaloUrl').value = cfg.zaloUrl || 'https://zalo.me/0333773700';
+
+      // Sao chép sâu mảng jobs để thao tác an toàn
+      _editorJobs = JSON.parse(JSON.stringify(getNormalizedJobs()));
+      renderEditorJobsList();
 
       document.getElementById('jobEditorModal').style.display = 'flex';
     }
@@ -1146,21 +1389,123 @@
       document.getElementById('jobEditorModal').style.display = 'none';
     }
 
+    function renderEditorJobsList() {
+      const container = document.getElementById('editorJobsContainer');
+      document.getElementById('editorJobCount').innerText = _editorJobs.length;
+
+      container.innerHTML = _editorJobs.map((job, idx) => `
+        <div class="editor-job-item" id="editor-job-${idx}">
+          <div class="editor-job-header">
+            <span style="font-weight: 800; color: ${idx === 0 ? '#F59E0B' : '#60A5FA'}; font-size: 13px;">
+              ${idx === 0 ? '⭐ Vị Trí #1 (Bảng Vàng Nổi Bật)' : `💼 Vị Trí #${idx + 1}`}
+            </span>
+            ${_editorJobs.length > 1 ? `
+              <button type="button" onclick="removeJobFromEditor(${idx})" style="background: rgba(239, 68, 68, 0.15); border: 1px solid #EF4444; color: #EF4444; padding: 2px 8px; border-radius: 6px; font-size: 11px; cursor: pointer;">
+                🗑️ Xóa vị trí này
+              </button>
+            ` : '<span style="font-size: 11px; color: #64748B;">(Tối thiểu 1 vị trí)</span>'}
+          </div>
+
+          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 8px;">
+            <div class="form-group" style="margin-bottom: 0;">
+              <label class="form-label" style="font-size: 11.5px;">Huy hiệu (Badge)</label>
+              <input type="text" value="${escapeHtml(job.badge || '')}" onchange="_editorJobs[${idx}].badge = this.value" class="form-input" style="padding: 8px 10px; font-size: 12.5px;">
+            </div>
+            <div class="form-group" style="margin-bottom: 0;">
+              <label class="form-label" style="font-size: 11.5px;">Mức lương hiển thị (*)</label>
+              <input type="text" value="${escapeHtml(job.salaryAmount || '')}" onchange="_editorJobs[${idx}].salaryAmount = this.value" class="form-input" style="padding: 8px 10px; font-size: 12.5px;" placeholder="Ví dụ: 7.500.000 đ">
+            </div>
+          </div>
+
+          <div class="form-group" style="margin-bottom: 0;">
+            <label class="form-label" style="font-size: 11.5px;">Tiêu đề vị trí tuyển dụng (*)</label>
+            <input type="text" value="${escapeHtml(job.title || '')}" onchange="_editorJobs[${idx}].title = this.value" class="form-input" style="padding: 8px 10px; font-size: 13px; font-weight: 700;">
+          </div>
+
+          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 8px;">
+            <div class="form-group" style="margin-bottom: 0;">
+              <label class="form-label" style="font-size: 11.5px;">Ca làm việc</label>
+              <input type="text" value="${escapeHtml(job.shiftTime || '')}" onchange="_editorJobs[${idx}].shiftTime = this.value" class="form-input" style="padding: 8px 10px; font-size: 12.5px;" placeholder="Ví dụ: 7h00 - 16h00">
+            </div>
+            <div class="form-group" style="margin-bottom: 0;">
+              <label class="form-label" style="font-size: 11.5px;">Ghi chú ca</label>
+              <input type="text" value="${escapeHtml(job.shiftNote || '')}" onchange="_editorJobs[${idx}].shiftNote = this.value" class="form-input" style="padding: 8px 10px; font-size: 12.5px;" placeholder="Ví dụ: Ca ngày 8 tiếng">
+            </div>
+          </div>
+
+          <div class="form-group" style="margin-bottom: 0;">
+            <label class="form-label" style="font-size: 11.5px;">Địa điểm làm việc</label>
+            <input type="text" value="${escapeHtml(job.location || '')}" onchange="_editorJobs[${idx}].location = this.value" class="form-input" style="padding: 8px 10px; font-size: 12.5px;">
+          </div>
+
+          <div class="form-group" style="margin-bottom: 0;">
+            <label class="form-label" style="font-size: 11.5px;">Thời gian làm việc chi tiết</label>
+            <input type="text" value="${escapeHtml(job.workingHours || '')}" onchange="_editorJobs[${idx}].workingHours = this.value" class="form-input" style="padding: 8px 10px; font-size: 12.5px;">
+          </div>
+
+          <div class="form-group" style="margin-bottom: 0;">
+            <label class="form-label" style="font-size: 11.5px;">Quyền lợi & Cơm trưa</label>
+            <textarea onchange="_editorJobs[${idx}].benefits = this.value" class="form-input" rows="2" style="padding: 8px 10px; font-size: 12.5px; resize: vertical;">${escapeHtml(job.benefits || '')}</textarea>
+          </div>
+
+          <div class="form-group" style="margin-bottom: 0;">
+            <label class="form-label" style="font-size: 11.5px;">Đối tượng tuyển dụng</label>
+            <input type="text" value="${escapeHtml(job.audience || '')}" onchange="_editorJobs[${idx}].audience = this.value" class="form-input" style="padding: 8px 10px; font-size: 12.5px;">
+          </div>
+
+          <div class="form-group" style="margin-bottom: 0;">
+            <label class="form-label" style="font-size: 11.5px;">Yêu cầu công việc</label>
+            <input type="text" value="${escapeHtml(job.requirements || '')}" onchange="_editorJobs[${idx}].requirements = this.value" class="form-input" style="padding: 8px 10px; font-size: 12.5px;">
+          </div>
+        </div>
+      `).join('');
+    }
+
+    function escapeHtml(str) {
+      if (!str) return '';
+      return String(str).replace(/&/g, '&amp;').replace(/"/g, '&quot;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+    }
+
+    function addJobToEditor() {
+      const newJobIndex = _editorJobs.length + 1;
+      _editorJobs.push({
+        id: `job-${Date.now()}`,
+        isHot: false,
+        badge: "⚡ TUYỂN DỤNG MỚI",
+        title: `Vị trí tuyển dụng mới #${newJobIndex}`,
+        salaryLabel: "Thu Nhập",
+        salaryAmount: "8.000.000 - 10.500.000 đ",
+        shiftTime: "7h30 - 16h30",
+        shiftNote: "Giờ hành chính",
+        location: "KCN tại Bình Dương",
+        audience: "Nam/Nữ từ 18 đến 45 tuổi",
+        workingHours: "Từ 7h30 đến 16h30 (nghỉ trưa 1 tiếng, không ép tăng ca)",
+        requirements: "Không yêu cầu kinh nghiệm, hướng dẫn chu đáo từ ngày đầu",
+        benefits: "Bao cơm, môi trường sạch sẽ, chế độ bảo hiểm và đãi ngộ đầy đủ"
+      });
+      renderEditorJobsList();
+      const newEl = document.getElementById(`editor-job-${_editorJobs.length - 1}`);
+      if (newEl) newEl.scrollIntoView({ behavior: 'smooth' });
+    }
+
+    function removeJobFromEditor(idx) {
+      if (_editorJobs.length <= 1) {
+        alert('Phải giữ lại ít nhất 1 vị trí tuyển dụng trên website!');
+        return;
+      }
+      if (confirm(`Bạn có chắc chắn muốn xóa vị trí: "${_editorJobs[idx].title}"?`)) {
+        _editorJobs.splice(idx, 1);
+        renderEditorJobsList();
+      }
+    }
+
     function collectEditorConfig() {
       const cfg = Object.assign({}, window.JOB_CONFIG || {});
       cfg.adminPin = document.getElementById('edit_adminPin').value.trim() || '6868';
-      cfg.jobTitle = document.getElementById('edit_jobTitle').value.trim();
-      cfg.salaryAmount = document.getElementById('edit_salaryAmount').value.trim();
-      cfg.shiftTime = document.getElementById('edit_shiftTime').value.trim();
-      cfg.workingHours = document.getElementById('edit_workingHours').value.trim();
-      cfg.benefits = document.getElementById('edit_benefits').value.trim();
-      cfg.audience = document.getElementById('edit_audience').value.trim();
-      cfg.requirements = document.getElementById('edit_requirements').value.trim();
-      cfg.location = document.getElementById('edit_location').value.trim();
       cfg.hotlineDisplay = document.getElementById('edit_hotlineDisplay').value.trim();
       cfg.hotline = document.getElementById('edit_hotline').value.trim();
       cfg.zaloUrl = document.getElementById('edit_zaloUrl').value.trim();
-      cfg.formJobPosition = document.getElementById('edit_formJobPosition').value.trim();
+      cfg.jobs = _editorJobs;
       return cfg;
     }
 
@@ -1169,64 +1514,71 @@
       window.JOB_CONFIG = updatedCfg;
       renderJobConfig();
       closeJobEditorModal();
-      alert('✅ Đã cập nhật xem thử trên giao diện! Bạn hãy kiểm tra lại bài đăng xem đã ưng ý chưa nhé.');
+      alert(`✅ Đã cập nhật xem thử thành công ${updatedCfg.jobs.length} vị trí tuyển dụng trên giao diện web!`);
     }
 
     function generateConfigFileContent(cfg) {
+      const jobsCode = (cfg.jobs || []).map((j, i) => `    {
+      id: "job-${i + 1}",
+      isHot: ${i === 0},
+      badge: "${(j.badge || '🔥 TUYỂN GẤP ĐI LÀM NGAY').replace(/"/g, '\\"')}",
+      title: "${(j.title || '').replace(/"/g, '\\"')}",
+      salaryLabel: "${(j.salaryLabel || 'Thu Nhập Chuẩn').replace(/"/g, '\\"')}",
+      salaryAmount: "${(j.salaryAmount || '').replace(/"/g, '\\"')}",
+      shiftTime: "${(j.shiftTime || '').replace(/"/g, '\\"')}",
+      shiftNote: "${(j.shiftNote || '').replace(/"/g, '\\"')}",
+      location: "${(j.location || '').replace(/"/g, '\\"')}",
+      audience: "${(j.audience || '').replace(/"/g, '\\"')}",
+      workingHours: "${(j.workingHours || '').replace(/"/g, '\\"')}",
+      requirements: "${(j.requirements || '').replace(/"/g, '\\"')}",
+      benefits: "${(j.benefits || '').replace(/"/g, '\\"')}"
+    }`).join(',\n');
+
       return `/**
  * ============================================================================
  * 📝 BẢNG CẤU HÌNH THÔNG TIN TUYỂN DỤNG - VIE BRAVO
  * ============================================================================
  * 👉 HƯỚNG DẪN DÀNH CHO HR / QUẢN LÝ:
- * 1. Bạn có thể mở file này bằng Notepad hoặc bất kỳ phần mềm nào để sửa chữ.
- * 2. Chỉ cần sửa các dòng chữ nằm trong cặp dấu ngoặc kép "..."
+ * 1. Bạn có thể mở file này bằng Notepad hoặc bấm "🔒 Tự Sửa Bài Tuyển Dụng" trên web.
+ * 2. Bạn có thể thêm bao nhiêu vị trí tuyển dụng tùy ý trong mảng "jobs".
+ *    - Vị trí đầu tiên (isHot: true) sẽ hiển thị ở Bảng Vàng Nổi Bật trên cùng.
+ *    - Các vị trí còn lại sẽ hiển thị ở mục "Các Vị Trí Tuyển Dụng Khác".
  * 3. Sau khi sửa xong, bấm Ctrl + S để lưu lại.
  * 4. Nhấp đúp vào file "1_Cap_Nhat_Len_Mang.bat" để tự động đưa nội dung mới lên web!
  * ============================================================================
  */
 
 window.JOB_CONFIG = {
-  // 🔐 0. MÃ PIN BẢO MẬT QUẢN TRỊ (Chống người ngoài vào xem đơn hoặc sửa bài)
-  adminPin: "${cfg.adminPin || '6868'}",
+  // 🔐 0. MÃ PIN BẢO MẬT QUẢN TRỊ (Mặc định: 6868)
+  adminPin: "${(cfg.adminPin || '6868').replace(/"/g, '\\"')}",
 
   // 1. THÔNG TIN LIÊN HỆ & HOTLINE
-  hotline: "${cfg.hotline || '0333773700'}",
-  hotlineDisplay: "${cfg.hotlineDisplay || '033 • 3773 • 700'}",
-  zaloUrl: "${cfg.zaloUrl || 'https://zalo.me/0333773700'}",
+  hotline: "${(cfg.hotline || '0333773700').replace(/"/g, '\\"')}",
+  hotlineDisplay: "${(cfg.hotlineDisplay || '033 • 3773 • 700').replace(/"/g, '\\"')}",
+  zaloUrl: "${(cfg.zaloUrl || 'https://zalo.me/0333773700').replace(/"/g, '\\"')}",
 
   // 2. KHUNG NỔI BẬT ĐẦU TRANG
-  brandTitle: "${cfg.brandTitle || 'Vie Bravo • Tuyển Dụng Bàu Bàng'}",
-  brandSubtitle: "${cfg.brandSubtitle || 'Kênh tiếp nhận hồ sơ trực tiếp cho công ty Vie Bravo. Đi làm ngay, 100% không qua trung gian, đãi ngộ chu đáo!'}",
-  trustTag1: "${cfg.trustTag1 || '⚡ Nhận Việc Trực Tiếp'}",
-  trustTag2: "${cfg.trustTag2 || '🛡️ 100% Không Thu Phí'}",
-  trustTag3: "${cfg.trustTag3 || '👵 Nhận Đến 58 Tuổi'}",
+  brandTitle: "${(cfg.brandTitle || 'Vie Bravo • Tuyển Dụng Lao Động Bình Dương').replace(/"/g, '\\"')}",
+  brandSubtitle: "${(cfg.brandSubtitle || 'Kênh tiếp nhận hồ sơ trực tiếp cho công ty Vie Bravo. Đi làm ngay, 100% không qua trung gian, đãi ngộ chu đáo!').replace(/"/g, '\\"')}",
+  trustTag1: "${(cfg.trustTag1 || '⚡ Nhận Việc Trực Tiếp').replace(/"/g, '\\"')}",
+  trustTag2: "${(cfg.trustTag2 || '🛡️ 100% Không Thu Phí').replace(/"/g, '\\"')}",
+  trustTag3: "${(cfg.trustTag3 || '👵 Nhận Đến 58 Tuổi').replace(/"/g, '\\"')}",
 
-  // 3. THÔNG TIN BÀI TUYỂN DỤNG CHÍNH
-  badge: "${cfg.badge || '🔥 TUYỂN GẤP ĐI LÀM NGAY'}",
-  jobTitle: "${cfg.jobTitle || 'Tuyển Dụng Tạp Vụ Nữ Nhà Xưởng KCN Bàu Bàng'}",
-  salaryLabel: "${cfg.salaryLabel || 'Thu Nhập Chuẩn'}",
-  salaryAmount: "${cfg.salaryAmount || '7.500.000 đ'}",
-  shiftTime: "${cfg.shiftTime || '7h00 - 16h00'}",
-  shiftNote: "${cfg.shiftNote || 'Ca ngày 8 tiếng'}",
+  // 3. CAM KẾT VIE BRAVO (3 TIÊU CHÍ)
+  commit1: "${(cfg.commit1 || '100% Không thu phí: Tuyệt đối không mất bất kỳ đồng nào.').replace(/"/g, '\\"')}",
+  commit2: "${(cfg.commit2 || 'Không giữ giấy tờ gốc: Chỉ đối chiếu bản photo/CCCD.').replace(/"/g, '\\"')}",
+  commit3: "${(cfg.commit3 || 'Hỗ trợ tận tình: Hướng dẫn nhận việc chu đáo trong ngày.').replace(/"/g, '\\"')}",
 
-  // 4. CHI TIẾT CÔNG VIỆC TRÊN BẢNG VÀNG
-  location: "${cfg.location || 'Nhà xưởng tại KCN Bàu Bàng, Bình Dương.'}",
-  audience: "${cfg.audience || 'Chỉ tuyển Nữ • Nhận đến 58 tuổi (ưu tiên các cô, các chị lao động phổ thông).'}",
-  workingHours: "${cfg.workingHours || 'Từ 7h00 sáng đến 16h00 chiều (làm 8 tiếng/ngày, không ép tăng ca).'}",
-  requirements: "${cfg.requirements || 'Không yêu cầu bằng cấp, không cần kinh nghiệm. Công việc nhẹ nhàng, được hướng dẫn chu đáo từ ngày đầu.'}",
-  benefits: "${cfg.benefits || 'Cơm trưa tự túc, phụ cấp tiền cơm, môi trường sạch sẽ, thoáng mát, chế độ bảo hiểm và đãi ngộ đầy đủ.'}",
+  // 4. CHÂN TRANG (FOOTER)
+  footerCompany: "${(cfg.footerCompany || 'CÔNG TY TNHH VIE BRAVO').replace(/"/g, '\\"')}",
+  footerBranch: "${(cfg.footerBranch || 'Trụ sở tuyển dụng & Hỗ trợ việc làm tỉnh Bình Dương').replace(/"/g, '\\"')}",
 
-  // 5. CAM KẾT VIE BRAVO (3 TIÊU CHÍ)
-  commit1: "${cfg.commit1 || '100% Không thu phí: Tuyệt đối không mất bất kỳ đồng nào.'}",
-  commit2: "${cfg.commit2 || 'Không giữ giấy tờ gốc: Chỉ đối chiếu bản photo/CCCD.'}",
-  commit3: "${cfg.commit3 || 'Hỗ trợ tận tình: Hướng dẫn nhận việc chu đáo trong ngày.'}",
-
-  // 6. FORM ĐĂNG KÝ
-  formJobPosition: "${cfg.formJobPosition || 'Tạp Vụ Nữ Nhà Xưởng KCN Bàu Bàng (7.5 Tr)'}",
-
-  // 7. CHÂN TRANG (FOOTER)
-  footerCompany: "${cfg.footerCompany || 'CÔNG TY TNHH VIE BRAVO'}",
-  footerBranch: "${cfg.footerBranch || 'Trụ sở tuyển dụng & Hỗ trợ việc làm tỉnh Bình Dương'}"
+  // =========================================================================
+  // 📋 DANH SÁCH CÁC VỊ TRÍ TUYỂN DỤNG (BẠN CÓ THỂ THÊM/SỬA/XÓA TÙY Ý)
+  // =========================================================================
+  jobs: [
+${jobsCode}
+  ]
 };
 `;
     }
@@ -1242,16 +1594,16 @@ window.JOB_CONFIG = {
       document.body.appendChild(link);
       link.click();
       document.body.removeChild(link);
-      alert('📥 Đã tải file "job-config.js" về máy!\n👉 Bạn chỉ cần copy đè file này vào thư mục web rồi chạy "1_Cap_Nhat_Len_Mang.bat" là xong!');
+      alert(`📥 Đã tải file "job-config.js" về máy (gồm ${cfg.jobs.length} vị trí)!\n👉 Bạn chỉ cần copy đè file này vào thư mục web rồi chạy "1_Cap_Nhat_Len_Mang.bat" là xong!`);
     }
 
     function copyJobConfigCode() {
       const cfg = collectEditorConfig();
       const code = generateConfigFileContent(cfg);
       navigator.clipboard.writeText(code).then(() => {
-        alert('📋 Đã sao chép toàn bộ mã cấu hình vào bộ nhớ tạm!\nBạn có thể mở file job-config.js bằng Notepad và dán vào.');
+        alert(`📋 Đã sao chép toàn bộ mã cấu hình (${cfg.jobs.length} vị trí) vào bộ nhớ tạm!\nBạn có thể mở file job-config.js bằng Notepad và dán vào.`);
       }).catch(() => {
-        alert('Không thể tự động sao chép. Bạn hãy dùng nút "Tải file job-config.js" nhé!');
+        alert('Không thể tự động sao chép. Bạn hãy dùng nút "Tải File job-config.js Mới" nhé!');
       });
     }
 
@@ -1261,10 +1613,6 @@ window.JOB_CONFIG = {
         const badge = document.getElementById('leadCountBadge');
         if (badge) badge.innerText = list.length + ' đơn đã nhận';
       } catch (e) {}
-    }
-
-    function scrollToApply() {
-      document.getElementById('apply-form-section').scrollIntoView({ behavior: 'smooth' });
     }
 
     async function handleFormSubmit(e) {
@@ -1325,8 +1673,12 @@ window.JOB_CONFIG = {
       
       document.getElementById('successToast').style.display = 'flex';
       document.getElementById('recruitmentForm').reset();
-      const cfg = window.JOB_CONFIG || {};
-      document.getElementById('jobPosition').value = cfg.formJobPosition || "Tạp Vụ Nữ Nhà Xưởng KCN Bàu Bàng (7.5 Tr)";
+      const jobs = getNormalizedJobs();
+      if (jobs.length > 0) {
+        const firstOpt = `${jobs[0].title} (${jobs[0].salaryAmount})`;
+        const select = document.getElementById('jobPosition');
+        if (select) select.value = firstOpt;
+      }
     }
 
     function closeToast() {
